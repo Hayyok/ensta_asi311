@@ -1,7 +1,9 @@
-package com.ensta.myfilmlist.service;
+package com.ensta.myfilmlist.service.impl;
 
 import com.ensta.myfilmlist.model.Film;
 import com.ensta.myfilmlist.model.Realisateur;
+import com.ensta.myfilmlist.service.MyFilmsService;
+import com.ensta.myfilmlist.service.ServiceException;
 
 import java.util.List;
 
@@ -38,6 +40,19 @@ public class MyFilmsServiceImpl implements MyFilmsService {
             }
         }
         return dureeTotale;
+    }
+    public double calculerNoteMoyenne(double[] notes) {
+        if (notes == null || notes.length == 0) {
+            return 0;
+        }
+
+        double somme = 0;
+        for (double note : notes) {
+            somme += note;
+        }
+
+        double moyenne = somme / notes.length;
+        return Math.round(moyenne * 100.0) / 100.0; // Arrondi à 2 chiffres après la virgule
     }
 
 }

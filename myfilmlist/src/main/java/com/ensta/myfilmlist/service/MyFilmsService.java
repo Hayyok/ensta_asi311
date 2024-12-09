@@ -26,4 +26,5 @@ public interface MyFilmsService {
 
 
     long calculerDureeTotale(List<Film> films) throws ServiceException;
+    double calculerNoteMoyenne(double[] notes);
 }
