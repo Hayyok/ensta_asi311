@@ -26,4 +26,23 @@ public class MyFilmsServiceImpl implements MyFilmsService {
         }
         return realisateur;
     }
+
+    public int calculerDureeTotale(List<Film> Film) {
+        int dureeTotale = 0 ;
+        for (Film film : Film) {
+            dureeTotale += film.getDuree();
+        }
+        return dureeTotale;
+    }
+
+    public double calculerNoteMoyenne(double[] tab){
+        double moyenne = 0;
+        for (double v : tab) {
+            moyenne += v;
+        }
+        moyenne=moyenne/tab.length;
+        moyenne = Math.round(moyenne*100.0)/100.0;
+        return moyenne;
+    }
+
 }

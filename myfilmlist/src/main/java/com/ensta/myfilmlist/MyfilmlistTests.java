@@ -88,46 +88,46 @@ public class MyfilmlistTests {
 	 * Permet de tester le calcul de la duree totale des films.
 	 */
 	public void calculerDureeTotaleTest() {
-//		// Creation des films
-//
-//		Film laCommunauteDeLAnneau = new Film();
-//		laCommunauteDeLAnneau.setTitre("La communauté de l'anneau");
-//		laCommunauteDeLAnneau.setDuree(178);
-//
-//		Film lesDeuxTours = new Film();
-//		lesDeuxTours.setTitre("Les deux tours");
-//		lesDeuxTours.setDuree(179);
-//
-//		Film leRetourDuRoi = new Film();
-//		leRetourDuRoi.setTitre("Le retour du roi");
-//		leRetourDuRoi.setDuree(201);
-//
-//		List<Film> leSeigneurDesAnneaux = new ArrayList<>();
-//		leSeigneurDesAnneaux.add(laCommunauteDeLAnneau);
-//		leSeigneurDesAnneaux.add(lesDeuxTours);
-//		leSeigneurDesAnneaux.add(leRetourDuRoi);
-//
-//		// Calcule de la duree totale
-//
-//		long dureeTotale = myFilmsService.calculerDureeTotale(leSeigneurDesAnneaux);
-//		// Attendue : 558 minutes
-//		System.out.println("La duree totale de la trilogie \"Le Seigneur des Anneaux\" est de : " + dureeTotale + " minutes");
+		// Creation des films
+
+		Film laCommunauteDeLAnneau = new Film();
+		laCommunauteDeLAnneau.setTitre("La communauté de l'anneau");
+		laCommunauteDeLAnneau.setDuree(178);
+
+		Film lesDeuxTours = new Film();
+		lesDeuxTours.setTitre("Les deux tours");
+		lesDeuxTours.setDuree(179);
+
+		Film leRetourDuRoi = new Film();
+		leRetourDuRoi.setTitre("Le retour du roi");
+		leRetourDuRoi.setDuree(201);
+
+		List<Film> leSeigneurDesAnneaux = new ArrayList<>();
+		leSeigneurDesAnneaux.add(laCommunauteDeLAnneau);
+		leSeigneurDesAnneaux.add(lesDeuxTours);
+		leSeigneurDesAnneaux.add(leRetourDuRoi);
+
+		// Calcule de la duree totale
+
+		long dureeTotale = myFilmsService.calculerDureeTotale(leSeigneurDesAnneaux);
+		// Attendue : 558 minutes
+		System.out.println("La duree totale de la trilogie \"Le Seigneur des Anneaux\" est de : " + dureeTotale + " minutes");
 	}
 
 	/**
 	 * Permet de tester le calcul de la note moyenne des films.
 	 */
 	public void calculerNoteMoyenneTest() {
-//		// Creation des notes
-//
-//		double[] notes = { 18, 15.5, 12 };
-//
-//		// Calcul de la note moyenne
-//
-//		double noteMoyenne = myFilmsService.calculerNoteMoyenne(notes);
-//
-//		// Attendue : 15,17
-//		System.out.println("La note moyenne est : " + noteMoyenne);
+		// Creation des notes
+
+		double[] notes = { 18, 15.5, 12 };
+
+		// Calcul de la note moyenne
+
+		double noteMoyenne = myFilmsService.calculerNoteMoyenne(notes);
+
+		// Attendue : 15,17
+		System.out.println("La note moyenne est : " + noteMoyenne);
 	}
 
 	/**
