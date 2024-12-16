@@ -3,7 +3,7 @@ import com.ensta.myfilmlist.service.ServiceException;
 import com.ensta.myfilmlist.model.Realisateur;
 import com.ensta.myfilmlist.model.Film;
 import com.ensta.myfilmlist.service.MyFilmsService;
-import com.ensta.myfilmlist.service.MyFilmsServiceImpl;
+import com.ensta.myfilmlist.service.impl.MyFilmsServiceImpl;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -121,16 +121,16 @@ public class MyfilmlistTests {
 	 * Permet de tester le calcul de la note moyenne des films.
 	 */
 	public void calculerNoteMoyenneTest() {
-//		// Creation des notes
-//
-//		double[] notes = { 18, 15.5, 12 };
-//
-//		// Calcul de la note moyenne
-//
-//		double noteMoyenne = myFilmsService.calculerNoteMoyenne(notes);
-//
-//		// Attendue : 15,17
-//		System.out.println("La note moyenne est : " + noteMoyenne);
+		// Creation des notes
+
+		double[] notes = { 18, 15.5, 12 };
+
+		// Calcul de la note moyenne
+
+		double noteMoyenne = myFilmsService.calculerNoteMoyenne(notes);
+
+		// Attendue : 15,17
+		System.out.println("La note moyenne est : " + noteMoyenne);
 	}
 
 	/**
