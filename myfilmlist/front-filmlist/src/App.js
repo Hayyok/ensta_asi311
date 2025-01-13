@@ -1,14 +1,9 @@
 import React from "react";
-import Header from "./Header";
-import FilmList from "./FilmList";
+import FilmContainer from "./FilmContainer";
 
 function App() {
-  return (
-      <div>
-        <Header />
-        <FilmList />
-      </div>
-  );
+    return <FilmContainer />;
 }
 
 export default App;
+

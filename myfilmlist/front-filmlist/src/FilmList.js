@@ -1,10 +1,7 @@
 import React from "react";
 import FilmCard from "./FilmCard";
-import mockFilms from "./mock/FilmMock";
 
-export default function FilmList() {
-    const films = mockFilms;
-
+export default function FilmList({ films }) {
     return (
         <div>
             {films.map((film) => (
