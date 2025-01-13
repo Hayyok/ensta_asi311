@@ -1,15 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
+import { Dialog, DialogTitle, DialogContent } from "@mui/material";
 import FilmCard from "./FilmCard";
-import mockFilms from "./mock/FilmMock";
+import CreateFilmForm from "./CreateFilmForm";
 
-export default function FilmList() {
-    const films = mockFilms;
+export default function FilmList({ films, onUpdateFilm, onDeleteFilm }) {
+    const [open, setOpen] = useState(false);
+    const [selectedFilm, setSelectedFilm] = useState(null);
+
+    const handleEditFilm = (film) => {
+        setSelectedFilm(film);
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+        setSelectedFilm(null);
+    };
+
+    const handleSubmit = (updatedFilm) => {
+        onUpdateFilm(updatedFilm);
+        handleClose();
+    };
 
     return (
         <div>
             {films.map((film) => (
-                <FilmCard key={film.id} film={film} />
+                <FilmCard
+                    key={film.id}
+                    film={film}
+                    onEdit={handleEditFilm}
+                    onDelete={onDeleteFilm}
+                />
             ))}
+            <Dialog onClose={handleClose} open={open}>
+                <DialogTitle>Editer un film</DialogTitle>
+                <DialogContent>
+                    {selectedFilm && (
+                        <CreateFilmForm
+                            film={selectedFilm}
+                            onSubmit={handleSubmit}
+                        />
+                    )}
+                </DialogContent>
+            </Dialog>
         </div>
     );
 }
