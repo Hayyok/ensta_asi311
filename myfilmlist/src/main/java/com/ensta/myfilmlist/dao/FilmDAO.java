@@ -6,4 +6,6 @@ import com.ensta.myfilmlist.model.Film;
 
 public interface FilmDAO {
     List<Film> findAll();
+
+    Film save(Film film);
 }
