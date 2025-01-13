@@ -1,4 +1,5 @@
 package com.ensta.myfilmlist.service;
+import com.ensta.myfilmlist.dto.FilmDTO;
 import com.ensta.myfilmlist.model.Realisateur;
 import com.ensta.myfilmlist.model.Film;
 import java.util.List;
@@ -27,4 +28,6 @@ public interface MyFilmsService {
 
     long calculerDureeTotale(List<Film> films) throws ServiceException;
     double calculerNoteMoyenne(double[] notes);
+
+    public List<FilmDTO> findAllFilms() throws ServiceException ;
 }
