@@ -1,5 +1,6 @@
-import axios from 'axios';
-
+//import axios from 'axios';
+import { getAllFilms, postFilm, putFilm, deleteFilm } from "../mock/FilmMock";
+export { getAllFilms, postFilm, putFilm, deleteFilm };
 const FILM_URI = 'http://localhost:8080/film'
 
 export function getAllFilms(){

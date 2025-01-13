@@ -1,4 +1,7 @@
-import axios from 'axios';
+// import axios from 'axios'; // Désactivez temporairement Axios
+import { getAllRealisateurs } from "../mock/RealisateurMock";
+
+export { getAllRealisateurs };
 
 const REALISATEUR_URI = 'http://localhost:8080/realisateur';
 

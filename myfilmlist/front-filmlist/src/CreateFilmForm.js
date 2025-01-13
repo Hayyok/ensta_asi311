@@ -2,23 +2,21 @@ import React, { useState, useEffect } from "react";
 import { TextField, Select, MenuItem, Button, FormControl, InputLabel } from "@mui/material";
 import { getAllRealisateurs } from "./api/RealisateurAPI";
 
-export default function CreateFilmForm({ onSubmit }) {
-    const [title, setTitle] = useState("");
-    const [duration, setDuration] = useState("");
+export default function CreateFilmForm({ film = {}, onSubmit }) {
+    const [title, setTitle] = useState(film.title || "");
+    const [duration, setDuration] = useState(film.duration || "");
+    const [selectedRealisateur, setSelectedRealisateur] = useState(film.realisateurId || "");
     const [realisateurs, setRealisateurs] = useState([]);
-    const [selectedRealisateur, setSelectedRealisateur] = useState("");
 
     useEffect(() => {
         getAllRealisateurs()
-            .then((response) => {
-                setRealisateurs(response.data);
-            })
+            .then((response) => setRealisateurs(response.data))
             .catch((err) => console.error("Erreur lors de la récupération des réalisateurs :", err));
     }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit({ title, duration, realisateurId: selectedRealisateur });
+        onSubmit({ id: film.id, title, duration, realisateurId: selectedRealisateur });
     };
 
     return (
@@ -51,7 +49,7 @@ export default function CreateFilmForm({ onSubmit }) {
                 </Select>
             </FormControl>
             <Button type="submit" variant="contained" color="primary">
-                Ajouter un film
+                {film.id ? "Modifier" : "Créer"}
             </Button>
         </form>
     );
