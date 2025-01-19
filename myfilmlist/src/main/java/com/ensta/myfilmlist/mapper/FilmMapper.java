@@ -7,6 +7,9 @@ import com.ensta.myfilmlist.dto.FilmDTO;
 import com.ensta.myfilmlist.form.FilmForm;
 import com.ensta.myfilmlist.model.Film;
 
+import static com.ensta.myfilmlist.mapper.RealisateurMapper.convertRealisateurDTOToRealisateur;
+import static com.ensta.myfilmlist.mapper.RealisateurMapper.convertRealisateurToRealisateurDTO;
+
 /**
  * Effectue les conversions des Films entre les couches de l'application.
  */
@@ -35,6 +38,7 @@ public class FilmMapper {
 		filmDTO.setId(film.getId());
 		filmDTO.setTitre(film.getTitre());
 		filmDTO.setDuree(film.getDuree());
+		filmDTO.setRealisateurDTO(convertRealisateurToRealisateurDTO(film.getRealisateur()));
 
 		return filmDTO;
 	}
@@ -50,6 +54,7 @@ public class FilmMapper {
 		film.setId(filmDTO.getId());
 		film.setTitre(filmDTO.getTitre());
 		film.setDuree(filmDTO.getDuree());
+		film.setRealisateur(convertRealisateurDTOToRealisateur(filmDTO.getRealisateurDTO()));
 
 		return film;
 	}

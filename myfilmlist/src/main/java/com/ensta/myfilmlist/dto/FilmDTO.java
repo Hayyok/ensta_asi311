@@ -11,6 +11,12 @@ public class FilmDTO {
 
 	private int duree;
 
+	private RealisateurDTO realisateur;
+
+	public RealisateurDTO getRealisateurDTO() { return realisateur; }
+
+	public void setRealisateurDTO(RealisateurDTO realisateur) { this.realisateur = realisateur; }
+
 	public long getId() {
 		return id;
 	}
