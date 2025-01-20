@@ -40,13 +40,21 @@ public class JdbcRealisateurDAO implements RealisateurDAO {
             film.setDuree(resultSet.getInt("duree"));
             return film;
         };
-        return jdbcTemplate.query(query, filmRowMapper, realisateurId);
+        try {
+            return jdbcTemplate.query(query, filmRowMapper, realisateurId);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     @Override
     public List<Realisateur> findAll() {
         String query = "SELECT id, nom, prenom, dateNaissance, celebre FROM Realisateur";
-        return jdbcTemplate.query(query, realisateurRowMapper);
+        try {
+            return jdbcTemplate.query(query, realisateurRowMapper);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     @Override
