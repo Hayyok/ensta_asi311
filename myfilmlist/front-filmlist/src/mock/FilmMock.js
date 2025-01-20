@@ -1,7 +1,7 @@
 export const mockFilms = [
-    { id: 1, title: "Inception", duration: 148, realisateurId: 1 },
-    { id: 2, title: "The Dark Knight", duration: 152, realisateurId: 2 },
-    { id: 3, title: "Interstellar", duration: 169, realisateurId: 1 },
+    { id: 1, titre: "Inception", duree: 148, realisateurId: 1 },
+    { id: 2, titre: "The Dark Knight", duree: 152, realisateurId: 2 },
+    { id: 3, titre: "Interstellar", duree: 169, realisateurId: 1 },
 ];
 
 export function getAllFilms() {

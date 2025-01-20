@@ -3,7 +3,7 @@ import { getAllFilms, postFilm, putFilm, deleteFilm } from "../mock/FilmMock";
 export { getAllFilms, postFilm, putFilm, deleteFilm };
 const FILM_URI = 'http://localhost:8080/film'
 
-export function getAllFilms(){
+/*export function getAllFilms(){
     return axios.get(FILM_URI);
 }
 
@@ -17,4 +17,4 @@ export function putFilm(id, film) {
 
 export function deleteFilm(id) {
     return axios.delete(`${FILM_URI}/${id}`);
-}
+} */
