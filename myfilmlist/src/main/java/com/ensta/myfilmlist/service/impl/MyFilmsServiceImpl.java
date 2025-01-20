@@ -76,6 +76,12 @@ public class MyFilmsServiceImpl implements MyFilmsService {
         }
     }
 
+    /**
+     * création d'un film si il est bien rattaché à un réalisateur existant
+     * @param filmForm le film à créer
+     * @return le FilmDTO correspondant au film créé avec l'id du FilmForm
+     * @throws ServiceException
+     */
     public FilmDTO createFilm(FilmForm filmForm) throws ServiceException {
         try {
             return convertFilmToFilmDTO(convertFilmFormToFilm(filmForm));
@@ -84,12 +90,17 @@ public class MyFilmsServiceImpl implements MyFilmsService {
         }
     }
 
+    /**
+     * Renvoie la liste de tous les réalisateurs
+     * @return la liste des realisateurDTOs
+     * @throws ServiceException
+     */
     public List<RealisateurDTO> findAllRealisateurs () throws ServiceException {
         try {
             List<Realisateur> liste = realisateurDAO.findAll();
             return convertRealisateurToRealisateurDTOs(liste);
         } catch (Exception e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServiceException(e.getMessage()) ;
         }
     }
 

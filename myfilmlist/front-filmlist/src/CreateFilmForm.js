@@ -3,8 +3,8 @@ import { TextField, Select, MenuItem, Button, FormControl, InputLabel } from "@m
 import { getAllRealisateurs } from "./api/RealisateurAPI";
 
 export default function CreateFilmForm({ film = {}, onSubmit }) {
-    const [title, setTitle] = useState(film.title || "");
-    const [duration, setDuration] = useState(film.duration || "");
+    const [titre, setTitle] = useState(film.titre || "");
+    const [duree, setDuration] = useState(film.duree || "");
     const [selectedRealisateur, setSelectedRealisateur] = useState(film.realisateurId || "");
     const [realisateurs, setRealisateurs] = useState([]);
 
@@ -16,21 +16,21 @@ export default function CreateFilmForm({ film = {}, onSubmit }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit({ id: film.id, title, duration, realisateurId: selectedRealisateur });
+        onSubmit({ id: film.id, titre, duree, realisateurId: selectedRealisateur });
     };
 
     return (
         <form onSubmit={handleSubmit}>
             <TextField
                 label="Titre"
-                value={title}
+                value={titre}
                 onChange={(e) => setTitle(e.target.value)}
                 fullWidth
                 margin="normal"
             />
             <TextField
                 label="Durée"
-                value={duration}
+                value={duree}
                 onChange={(e) => setDuration(e.target.value)}
                 fullWidth
                 margin="normal"

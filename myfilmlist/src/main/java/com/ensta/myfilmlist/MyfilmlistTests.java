@@ -40,22 +40,22 @@ public class MyfilmlistTests {
 		Film avatar = new Film();
 		avatar.setTitre("Avatar");
 		avatar.setDuree(162);
-		avatar.setRealisateur(jamesCameron);
+		avatar.setRealisateurId(jamesCameron.getId());
 
 		Film laCommunauteDeLAnneau = new Film();
 		laCommunauteDeLAnneau.setTitre("La communauté de l'anneau");
 		laCommunauteDeLAnneau.setDuree(178);
-		laCommunauteDeLAnneau.setRealisateur(peterJackson);
+		laCommunauteDeLAnneau.setRealisateurId(peterJackson.getId());
 
 		Film lesDeuxTours = new Film();
 		lesDeuxTours.setTitre("Les deux tours");
 		lesDeuxTours.setDuree(179);
-		lesDeuxTours.setRealisateur(peterJackson);
+		lesDeuxTours.setRealisateurId(peterJackson.getId());
 
 		Film leRetourDuRoi = new Film();
 		leRetourDuRoi.setTitre("Le retour du roi");
 		leRetourDuRoi.setDuree(201);
-		leRetourDuRoi.setRealisateur(peterJackson);
+		leRetourDuRoi.setRealisateurId(peterJackson.getId());
 
 		// Affectation des films aux realisateurs
 
@@ -173,7 +173,7 @@ public class MyfilmlistTests {
 			// Attendue : 5
 			System.out.println("Combien y a-t-il de films ? " + films.size());
 
-			films.forEach(f -> System.out.println("Le realisateur du film : '" + f.getTitre() + "' est : " + f.getRealisateurDTO()));
+			films.forEach(f -> System.out.println("Le realisateur du film : '" + f.getTitre() + "' est : " + f.getRealisateurDTOId()));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}

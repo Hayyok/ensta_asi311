@@ -4,6 +4,7 @@ import com.ensta.myfilmlist.dao.FilmDAO;
 import com.ensta.myfilmlist.model.Film;
 import com.ensta.myfilmlist.model.Realisateur;
 import com.ensta.myfilmlist.persistence.ConnectionManager;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -29,8 +30,11 @@ public class JdbcFilmDAO implements FilmDAO {
             film.setRealisateurId(resultSet.getInt("realisateurId"));
             return film;
         };
-
-        return jdbcTemplate.query(query, rowMapper);
+        try {
+            return jdbcTemplate.query(query, rowMapper);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     public Film save(Film film) {

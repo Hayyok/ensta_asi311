@@ -6,15 +6,12 @@ package com.ensta.myfilmlist.form;
 public class FilmForm {
 
 	private String titre;
-
 	private int duree;
-
 	private long realisateurId;
 
 	public String getTitre() {
 		return titre;
 	}
-
 	public void setTitre(String titre) {
 		this.titre = titre;
 	}
@@ -22,7 +19,6 @@ public class FilmForm {
 	public int getDuree() {
 		return duree;
 	}
-
 	public void setDuree(int duree) {
 		this.duree = duree;
 	}
@@ -30,7 +26,6 @@ public class FilmForm {
 	public long getRealisateurId() {
 		return realisateurId;
 	}
-
 	public void setRealisateurId(long realisateurId) {
 		this.realisateurId = realisateurId;
 	}
