@@ -11,6 +11,8 @@ import com.ensta.myfilmlist.model.Film;
 import com.ensta.myfilmlist.model.Realisateur;
 import com.ensta.myfilmlist.service.MyFilmsService;
 import com.ensta.myfilmlist.service.ServiceException;
+
+import java.util.ArrayList;
 import java.util.OptionalDouble;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -25,6 +27,7 @@ public class MyFilmsServiceImpl implements MyFilmsService {
     private static final int NB_FILMS_MIN_REALISATEUR_CELEBRE = 3;
     private final FilmDAO filmDAO = new JdbcFilmDAO();
     private final RealisateurDAO realisateurDAO = new JdbcRealisateurDAO();
+
 
     /**
      * Calcule la somme des durées d'une liste de films
