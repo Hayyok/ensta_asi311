@@ -16,7 +16,6 @@ public class RealisateurDTO {
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -24,7 +23,6 @@ public class RealisateurDTO {
     public String getNom() {
         return nom;
     }
-
     public void setNom(String nom) {
         this.nom = nom;
     }
@@ -32,7 +30,6 @@ public class RealisateurDTO {
     public String getPrenom() {
         return prenom;
     }
-
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
@@ -40,7 +37,6 @@ public class RealisateurDTO {
     public LocalDate getDateNaissance() {
         return dateNaissance;
     }
-
     public void setDateNaissance(LocalDate dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
@@ -48,7 +44,6 @@ public class RealisateurDTO {
     public List<FilmDTO> getFilmRealises() {
         return filmRealises;
     }
-
     public void setFilmRealises(List<FilmDTO> filmRealises) {
         this.filmRealises = filmRealises;
     }
@@ -56,7 +51,6 @@ public class RealisateurDTO {
     public boolean isCelebre() {
         return celebre;
     }
-
     public void setCelebre(boolean celebre) {
         this.celebre = celebre;
     }

@@ -9,7 +9,7 @@ public class Film {
 	private long id;
 	private String titre;
 	private int duree;
-	private Realisateur realisateur;
+	private long realisateurId;
 
 	// Getters et Setters
 	public long getId() {
@@ -26,8 +26,8 @@ public class Film {
 		this.titre = titre;
 	}
 
-	public Realisateur getRealisateur() {return realisateur;}
-	public void setRealisateur(Realisateur realisateur) {this.realisateur = realisateur;}
+	public long getRealisateurId() {return realisateurId;}
+	public void setRealisateurId(long realisateurId) {this.realisateurId = realisateurId;}
 
 	public int getDuree() {
 		return duree;

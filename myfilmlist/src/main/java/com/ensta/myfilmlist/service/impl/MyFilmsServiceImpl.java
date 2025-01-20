@@ -58,6 +58,11 @@ public class MyFilmsServiceImpl implements MyFilmsService {
         return moyenneOptional.isPresent() ? Math.round(moyenneOptional.getAsDouble() * 100.0) / 100.0 : 0;
     }
 
+    /**
+     * Récupère l'ensemble des films
+     * @return une liste de l'ensemble des films DTO
+     * @throws ServiceException en cas d'erreur
+     */
     @Override
     public List<FilmDTO> findAllFilms() throws ServiceException {
         try {

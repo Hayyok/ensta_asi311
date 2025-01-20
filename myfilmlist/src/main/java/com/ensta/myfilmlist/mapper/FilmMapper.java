@@ -38,7 +38,7 @@ public class FilmMapper {
 		filmDTO.setId(film.getId());
 		filmDTO.setTitre(film.getTitre());
 		filmDTO.setDuree(film.getDuree());
-		filmDTO.setRealisateurDTO(convertRealisateurToRealisateurDTO(film.getRealisateur()));
+		filmDTO.setRealisateurDTOId(film.getRealisateurId());
 
 		return filmDTO;
 	}
@@ -54,7 +54,7 @@ public class FilmMapper {
 		film.setId(filmDTO.getId());
 		film.setTitre(filmDTO.getTitre());
 		film.setDuree(filmDTO.getDuree());
-		film.setRealisateur(convertRealisateurDTOToRealisateur(filmDTO.getRealisateurDTO()));
+		film.setRealisateurId(filmDTO.getRealisateurDTOId());
 
 		return film;
 	}

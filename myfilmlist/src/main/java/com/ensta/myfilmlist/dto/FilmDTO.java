@@ -6,21 +6,16 @@ package com.ensta.myfilmlist.dto;
 public class FilmDTO {
 
 	private long id;
-
 	private String titre;
-
 	private int duree;
+	private long realisateurDTOId;
 
-	private RealisateurDTO realisateur;
-
-	public RealisateurDTO getRealisateurDTO() { return realisateur; }
-
-	public void setRealisateurDTO(RealisateurDTO realisateur) { this.realisateur = realisateur; }
+	public long getRealisateurDTOId() { return realisateurDTOId; }
+	public void setRealisateurDTOId(long realisateurDTOId) { this.realisateurDTOId = realisateurDTOId; }
 
 	public long getId() {
 		return id;
 	}
-
 	public void setId(long id) {
 		this.id = id;
 	}
@@ -28,7 +23,6 @@ public class FilmDTO {
 	public String getTitre() {
 		return titre;
 	}
-
 	public void setTitre(String titre) {
 		this.titre = titre;
 	}
@@ -36,7 +30,6 @@ public class FilmDTO {
 	public int getDuree() {
 		return duree;
 	}
-
 	public void setDuree(int duree) {
 		this.duree = duree;
 	}
