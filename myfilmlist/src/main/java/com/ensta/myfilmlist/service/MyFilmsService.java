@@ -7,6 +7,7 @@ import com.ensta.myfilmlist.model.Film;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Interface pour les services liés à la gestion des films et réalisateurs.
@@ -42,23 +43,27 @@ public interface MyFilmsService {
      * @return la liste des realisateur qui sont celebres
      * @throws ServiceException si la liste est nulle ou si un des realisateurs de la liste est nul
      */
-    static List<Realisateur> updateRealisateurCelebres(List<Realisateur> realisateurs) throws ServiceException {
+    static List<Realisateur> updateListeRealisateurCelebre(List<Realisateur> realisateurs) throws ServiceException {
         if (realisateurs == null) {
             throw new ServiceException("La liste de Realisateur doit être non nulle");
         }
-        for (Realisateur realisateur : realisateurs) {
-            if (realisateur == null) {
-                throw new ServiceException("Les Realisateurs de la liste doivent être non nuls");
-            }
+
+        // Validation des réalisateurs avec Stream
+        if (realisateurs.stream().anyMatch(realisateur -> realisateur == null)) {
+            throw new ServiceException("Les Realisateurs de la liste doivent être non nuls");
         }
-        List<Realisateur> realisateursCelebres = new ArrayList<>();
-        for (Realisateur realisateur : realisateurs) {
-            realisateur = updateRealisateurCelebre(realisateur);
-            if (realisateur.isCelebre()) {
-                realisateursCelebres.add(realisateur);
-            }
-        }
-        return realisateursCelebres;
+
+        // Transformation et filtrage avec Stream
+        return realisateurs.stream()
+                .map(realisateur -> {
+                    try {
+                        return updateRealisateurCelebre(realisateur);
+                    } catch (ServiceException e) {
+                        throw new RuntimeException(e); // Relancer en tant que RuntimeException
+                    }
+                })
+                .filter(Realisateur::isCelebre)
+                .collect(Collectors.toList()); // Collecter les réalisateurs célèbres dans une liste immuable
     }
 
     public long calculerDureeTotale(List<Film> films) throws ServiceException;
