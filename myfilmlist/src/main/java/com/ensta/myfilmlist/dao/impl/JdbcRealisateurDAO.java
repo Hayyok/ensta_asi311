@@ -3,6 +3,7 @@ package com.ensta.myfilmlist.dao.impl;
 import com.ensta.myfilmlist.dao.RealisateurDAO;
 import com.ensta.myfilmlist.model.Realisateur;
 import com.ensta.myfilmlist.persistence.ConnectionManager;
+import com.ensta.myfilmlist.service.ServiceException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class JdbcRealisateurDAO implements RealisateurDAO {
+    static final int NB_FILMS_MIN_REALISATEUR_CELEBRE = 3;
     private JdbcTemplate jdbcTemplate = ConnectionManager.getJdbcTemplate();
 
     // RowMapper for Realisateur
@@ -76,5 +78,18 @@ public class JdbcRealisateurDAO implements RealisateurDAO {
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty(); // Aucun résultat trouvé
         }
+    }
+
+    public Realisateur update(Realisateur realisateur){
+
+        String query = "UPDATE Realisateur SET nom = ?, prenom = ?, date_naissance = ?, celebre = ? WHERE id = ?";
+        jdbcTemplate.update(query,
+                realisateur.getNom(),
+                realisateur.getPrenom(),
+                java.sql.Date.valueOf(realisateur.getDateNaissance()),
+                realisateur.isCelebre(),
+                realisateur.getId()
+        );
+        return realisateur;
     }
 }

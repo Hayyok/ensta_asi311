@@ -13,19 +13,18 @@ import com.ensta.myfilmlist.service.MyFilmsService;
 import com.ensta.myfilmlist.service.ServiceException;
 import org.springframework.dao.EmptyResultDataAccessException;
 
+import java.security.Provider;
 import java.util.*;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static com.ensta.myfilmlist.mapper.FilmMapper.*;
-import static com.ensta.myfilmlist.mapper.RealisateurMapper.convertRealisateurToRealisateurDTO;
-import static com.ensta.myfilmlist.mapper.RealisateurMapper.convertRealisateurToRealisateurDTOs;
+import static com.ensta.myfilmlist.mapper.RealisateurMapper.*;
 
 public class MyFilmsServiceImpl implements MyFilmsService {
     private static final int NB_FILMS_MIN_REALISATEUR_CELEBRE = 3;
     private final FilmDAO filmDAO = new JdbcFilmDAO();
     private final RealisateurDAO realisateurDAO = new JdbcRealisateurDAO();
-
 
     /**
      * Calcule la somme des durées d'une liste de films
@@ -80,10 +79,21 @@ public class MyFilmsServiceImpl implements MyFilmsService {
      * @return le FilmDTO correspondant au film créé avec l'id du FilmForm
      * @throws ServiceException
      */
+    @Override
     public FilmDTO createFilm(FilmForm filmForm) throws ServiceException {
         try {
             Film newFilm = convertFilmFormToFilm(filmForm);
             newFilm = filmDAO.save(newFilm);
+
+            Optional<Realisateur> realisateurOpt = realisateurDAO.findById(newFilm.getRealisateurId());
+            if (realisateurOpt.isPresent()) {
+                Realisateur realisateur = realisateurOpt.get();
+                List<Film> filmRealises = filmDAO.findByRealisateurId(realisateur.getId());
+                realisateur.setFilmRealises(filmRealises);
+                Realisateur newRealisateur=MyFilmsService.updateRealisateurCelebre(realisateur);
+                realisateurDAO.update(newRealisateur);
+            }
+
             return convertFilmToFilmDTO(newFilm);
         } catch (Exception e) {
             throw new ServiceException(e.getMessage());
@@ -119,6 +129,40 @@ public class MyFilmsServiceImpl implements MyFilmsService {
             return Optional.of(convertRealisateurToRealisateurDTO(realisateur));
         } catch (Exception e) {
             return Optional.empty();
+        }
+    }
+
+    public FilmDTO findFilmById(long id) throws ServiceException {
+        try{
+            Film film = filmDAO.findById(id).get();
+            return convertFilmToFilmDTO(film);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public void deleteFilm(long id) throws ServiceException {
+        try{
+            Optional<Film> filmOpt = filmDAO.findById(id);
+            if (filmOpt.isEmpty()){
+                throw new ServiceException("Film introuvable pour cet identifiant");
+            }
+
+            Film film = filmOpt.get();
+            Optional<Realisateur> realisateurOpt = realisateurDAO.findById(film.getRealisateurId());
+
+            filmDAO.delete(film);
+
+            if (realisateurOpt.isPresent()){
+                Realisateur realisateur = realisateurOpt.get();
+                List<Film> filmsRealises = filmDAO.findByRealisateurId(realisateur.getId());
+                realisateur.setFilmRealises(filmsRealises);
+                Realisateur newRealisateur=MyFilmsService.updateRealisateurCelebre(realisateur);
+                realisateurDAO.update(newRealisateur);
+            }
+
+        } catch (Exception e) {
+            throw new ServiceException(e.getMessage());
         }
     }
 }

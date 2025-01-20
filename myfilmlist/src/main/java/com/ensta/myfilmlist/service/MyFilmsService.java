@@ -1,4 +1,6 @@
 package com.ensta.myfilmlist.service;
+import com.ensta.myfilmlist.dao.RealisateurDAO;
+import com.ensta.myfilmlist.dao.impl.JdbcRealisateurDAO;
 import com.ensta.myfilmlist.dto.FilmDTO;
 import com.ensta.myfilmlist.dto.RealisateurDTO;
 import com.ensta.myfilmlist.form.FilmForm;
@@ -16,12 +18,13 @@ import java.util.stream.Collectors;
 public interface MyFilmsService {
     static final int NB_FILMS_MIN_REALISATEUR_CELEBRE = 3;
 
+
     /**
      * Met à jour l'attribut celebre d'un Realisateur
      * @param realisateur le realisateur
      * @return Le Realisateur avec l'attribut celebre mis à jour
      * @throws ServiceException si le realisateur ou la liste de ses FilmRealises est null
-     */
+    */
     static Realisateur updateRealisateurCelebre(Realisateur realisateur) throws ServiceException {
         if (realisateur == null) {
             throw new ServiceException("Le réalisateur ne peut pas être null.");
@@ -32,11 +35,13 @@ public interface MyFilmsService {
         }
 
         // Mise à jour du statut celebre
-        boolean estCelebre = realisateur.getFilmRealises().size() >= NB_FILMS_MIN_REALISATEUR_CELEBRE;
+        boolean estCelebre = (realisateur.getFilmRealises().size() >= NB_FILMS_MIN_REALISATEUR_CELEBRE);
         realisateur.setCelebre(estCelebre);
 
         return realisateur;
     }
+
+
 
     /**
      * Met à jour l'attribut celebre d'une liste de realisateur et renvoie uniquement la liste des realisateur qui sont celebre
@@ -80,4 +85,8 @@ public interface MyFilmsService {
     public RealisateurDTO findRealisateurByNomAndPrenom(String nom, String prenom) throws ServiceException;
 
     public Optional<RealisateurDTO> findRealisateurDTOById(long id) throws ServiceException;
+
+    FilmDTO findFilmById(long id) throws ServiceException;
+
+    void deleteFilm(long id) throws ServiceException;
 }

@@ -168,14 +168,14 @@ public class MyfilmlistTests {
 
 			System.out.println("Le nouveau film 'Titanic' possede l'id : " + newFilm.getId());
 
-			FilmForm titanic2 = new FilmForm();
-			titanic2.setTitre("Titanic 2");
-			titanic2.setDuree(195);
-			titanic2.setRealisateurId(realisateurDTO.getId());
+			//FilmForm titanic2 = new FilmForm();
+			//titanic2.setTitre("Titanic 2");
+			//titanic2.setDuree(195);
+			//titanic2.setRealisateurId(realisateurDTO.getId());
 
-			FilmDTO newFilm2 = myFilmsService.createFilm(titanic2);
+			//FilmDTO newFilm2 = myFilmsService.createFilm(titanic2);
 
-			System.out.println("Le nouveau film 'Titanic 2' possede l'id : " + newFilm2.getId());
+			//System.out.println("Le nouveau film 'Titanic 2' possede l'id : " + newFilm2.getId());
 
 			List<FilmDTO> films = myFilmsService.findAllFilms();
 
@@ -199,67 +199,68 @@ public class MyfilmlistTests {
 	 * Permet de tester la recuperation d'un film par son identifiant.
 	 */
 	public void findFilmByIdTest() {
-//		try {
-//			FilmDTO avatar = myFilmsService.findFilmById(1);
-//			System.out.println("Le film avec l'identifiant 1 est : " + avatar);
-//		} catch (ServiceException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			FilmDTO avatar = myFilmsService.findFilmById(1);
+			System.out.println("Le film avec l'identifiant 1 est : " + avatar);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
 	 * Permet de tester la suppression d'un film avec son identifiant.
 	 */
 	public void deleteFilmByIdTest() {
-//		try {
-//			FilmDTO filmDTO = myFilmsService.findFilmById(5);
-//			System.out.println("Le film avec l'identifiant 5 est : " + filmDTO);
-//			myFilmsService.deleteFilm(5);
-//			filmDTO = myFilmsService.findFilmById(5);
-//
-//			System.out.println("Suppression du film avec l'identifiant 5...");
-//			System.out.println("Le film avec l'identifiant 5 est : " + filmDTO);
-//		} catch (ServiceException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			FilmDTO filmDTO = myFilmsService.findFilmById(5);
+			System.out.println("Le film avec l'identifiant 5 est : " + filmDTO);
+			myFilmsService.deleteFilm(5);
+			filmDTO = myFilmsService.findFilmById(5);
+
+			System.out.println("Suppression du film avec l'identifiant 5...");
+			System.out.println("Le film avec l'identifiant 5 est : " + filmDTO);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
 	 * Permet de tester la mise a jour du statut celebre d'un Realisateur.
 	 */
 	public void updateRealisateurCelebre() {
-//		try {
-//			RealisateurDTO realisateurDTO = myFilmsService.findRealisateurByNomAndPrenom("Cameron", "James");
-//			// Attendue : false
-//			System.out.println("James Cameron est-il celebre ? " + realisateurDTO.isCelebre());
-//
-//			FilmForm titanic = new FilmForm();
-//			titanic.setTitre("Titanic");
-//			titanic.setDuree(195);
-//			titanic.setRealisateurId(realisateurDTO.getId());
-//
-//			FilmForm leHobbit = new FilmForm();
-//			leHobbit.setTitre("Le Hobbit : Un voyage inattendu");
-//			leHobbit.setDuree(169);
-//			leHobbit.setRealisateurId(realisateurDTO.getId());
-//
-//			myFilmsService.createFilm(titanic);
-//			FilmDTO leHobbitDTO = myFilmsService.createFilm(leHobbit);
-//
-//			System.out.println("James Cameron a realise deux nouveaux films");
-//			realisateurDTO = myFilmsService.findRealisateurByNomAndPrenom("Cameron", "James");
-//
-//			// Attendue : true
-//			System.out.println("James Cameron est-il celebre ? " + realisateurDTO.isCelebre());
-//
-//			myFilmsService.deleteFilm(leHobbitDTO.getId());
-//			System.out.println("Ce n'est pas James Cameron qui a realise le Hobbit, suppression du film !");
-//			realisateurDTO = myFilmsService.findRealisateurByNomAndPrenom("Cameron", "James");
-//
-//			// Attendue : false
-//			System.out.println("James Cameron est-il celebre ? " + realisateurDTO.isCelebre());
-//		} catch (ServiceException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			RealisateurDTO realisateurDTO = myFilmsService.findRealisateurByNomAndPrenom("Cameron", "James");
+			// Attendue : false
+			System.out.println("James Cameron est-il celebre ? " + realisateurDTO.isCelebre());
+
+			FilmForm titanic = new FilmForm();
+			titanic.setTitre("Titanic");
+			titanic.setDuree(195);
+			titanic.setRealisateurId(realisateurDTO.getId());
+
+			FilmForm leHobbit = new FilmForm();
+			leHobbit.setTitre("Le Hobbit : Un voyage inattendu");
+			leHobbit.setDuree(169);
+			leHobbit.setRealisateurId(realisateurDTO.getId());
+
+			myFilmsService.createFilm(titanic);
+			FilmDTO leHobbitDTO = myFilmsService.createFilm(leHobbit);
+
+			System.out.println("James Cameron a realise deux nouveaux films");
+			realisateurDTO = myFilmsService.findRealisateurByNomAndPrenom("Cameron", "James");
+
+			// Attendue : true
+			System.out.println("James Cameron est-il celebre ? " + realisateurDTO.isCelebre());
+
+			myFilmsService.deleteFilm(leHobbitDTO.getId());
+
+			System.out.println("Ce n'est pas James Cameron qui a realise le Hobbit, suppression du film !");
+			realisateurDTO = myFilmsService.findRealisateurByNomAndPrenom("Cameron", "James");
+
+			// Attendue : false
+			System.out.println("James Cameron est-il celebre ? " + realisateurDTO.isCelebre());
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
 	}
 }

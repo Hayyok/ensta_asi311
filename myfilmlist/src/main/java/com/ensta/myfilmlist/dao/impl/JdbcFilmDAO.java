@@ -14,6 +14,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Optional;
 
 public class JdbcFilmDAO implements FilmDAO {
     private JdbcTemplate jdbcTemplate = ConnectionManager.getJdbcTemplate();
@@ -53,5 +54,44 @@ public class JdbcFilmDAO implements FilmDAO {
         film.setId(keyHolder.getKey().longValue());
 
         return film;
+    }
+
+    public Optional<Film> findById(long id){
+        String query = "SELECT id, titre, duree, realisateur_id FROM Film WHERE id = ?";
+        RowMapper<Film> filmRowMapper = (resultSet, rowNum) -> {
+            Film film = new Film();
+            film.setId(resultSet.getInt("id"));
+            film.setTitre(resultSet.getString("titre"));
+            film.setDuree(resultSet.getInt("duree"));
+            return film;
+        };
+        try {
+            Film film = jdbcTemplate.queryForObject(query, filmRowMapper, id);
+            return Optional.of(film);
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty(); // Aucun résultat trouvé
+        }
+    }
+
+    public void delete(Film film){
+        String query="DELETE FROM Film WHERE id = ?";
+        jdbcTemplate.update(query, film.getId());
+    }
+
+    public List<Film> findByRealisateurId(long realisateurId){
+        String query = "SELECT * FROM Film WHERE realisateur_id = ?";
+        RowMapper<Film> rowMapper = (resultSet, rowNum) -> {
+            Film film = new Film();
+            film.setId(resultSet.getInt("id"));
+            film.setTitre(resultSet.getString("titre"));
+            film.setDuree(resultSet.getInt("duree"));
+            film.setRealisateurId(resultSet.getInt("realisateur_id"));
+            return film;
+        };
+        try {
+            return jdbcTemplate.query(query, rowMapper, realisateurId);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 }
