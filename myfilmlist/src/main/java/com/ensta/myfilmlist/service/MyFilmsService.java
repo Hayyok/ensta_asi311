@@ -7,6 +7,7 @@ import com.ensta.myfilmlist.model.Film;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -77,4 +78,6 @@ public interface MyFilmsService {
     public List<RealisateurDTO> findAllRealisateurs () throws ServiceException;
 
     public RealisateurDTO findRealisateurByNomAndPrenom(String nom, String prenom) throws ServiceException;
+
+    public Optional<RealisateurDTO> findRealisateurDTOById(long id) throws ServiceException;
 }

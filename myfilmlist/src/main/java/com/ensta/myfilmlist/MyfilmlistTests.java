@@ -169,9 +169,9 @@ public class MyfilmlistTests {
 			System.out.println("Le nouveau film 'Titanic' possede l'id : " + newFilm.getId());
 
 			FilmForm titanic2 = new FilmForm();
-			titanic.setTitre("Titanic 2");
-			titanic.setDuree(195);
-			titanic.setRealisateurId(realisateurDTO.getId());
+			titanic2.setTitre("Titanic 2");
+			titanic2.setDuree(195);
+			titanic2.setRealisateurId(realisateurDTO.getId());
 
 			FilmDTO newFilm2 = myFilmsService.createFilm(titanic2);
 
@@ -182,11 +182,18 @@ public class MyfilmlistTests {
 			// Attendue : 5
 			System.out.println("Combien y a-t-il de films ? " + films.size());
 
-			films.forEach(f -> System.out.println("id du film : " + f.getId() + "Le realisateur du film : '" + f.getTitre() + "' est : " + f.getRealisateurDTOId()));
+			films.forEach(f -> {
+                try {
+                    System.out.println("Id du film : " + f.getId() + " Le realisateur du film : '" + f.getTitre() + "' est : " + myFilmsService.findRealisateurDTOById(f.getRealisateurDTOId()).get().toString());
+                } catch (ServiceException e) {
+                    throw new RuntimeException(e);
+                }
+            });
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
 	}
+
 
 	/**
 	 * Permet de tester la recuperation d'un film par son identifiant.

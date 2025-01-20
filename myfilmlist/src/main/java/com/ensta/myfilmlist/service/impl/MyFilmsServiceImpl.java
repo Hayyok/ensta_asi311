@@ -11,13 +11,11 @@ import com.ensta.myfilmlist.model.Film;
 import com.ensta.myfilmlist.model.Realisateur;
 import com.ensta.myfilmlist.service.MyFilmsService;
 import com.ensta.myfilmlist.service.ServiceException;
+import org.springframework.dao.EmptyResultDataAccessException;
 
-import java.util.ArrayList;
-import java.util.OptionalDouble;
+import java.util.*;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-import java.util.Arrays;
-import java.util.List;
 
 import static com.ensta.myfilmlist.mapper.FilmMapper.*;
 import static com.ensta.myfilmlist.mapper.RealisateurMapper.convertRealisateurToRealisateurDTO;
@@ -112,6 +110,15 @@ public class MyFilmsServiceImpl implements MyFilmsService {
             return convertRealisateurToRealisateurDTO(realisateur);
         } catch (Exception e) {
             throw new ServiceException(e.getMessage());
+        }
+    }
+
+    public Optional<RealisateurDTO> findRealisateurDTOById(long id) throws ServiceException {
+        try {
+            Realisateur realisateur = realisateurDAO.findById(id).get();
+            return Optional.of(convertRealisateurToRealisateurDTO(realisateur));
+        } catch (Exception e) {
+            return Optional.empty();
         }
     }
 }
