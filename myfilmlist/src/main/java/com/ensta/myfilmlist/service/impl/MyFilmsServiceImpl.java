@@ -11,6 +11,8 @@ import com.ensta.myfilmlist.model.Film;
 import com.ensta.myfilmlist.model.Realisateur;
 import com.ensta.myfilmlist.service.MyFilmsService;
 import com.ensta.myfilmlist.service.ServiceException;
+
+import java.util.ArrayList;
 import java.util.OptionalDouble;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -25,6 +27,7 @@ public class MyFilmsServiceImpl implements MyFilmsService {
     private static final int NB_FILMS_MIN_REALISATEUR_CELEBRE = 3;
     private final FilmDAO filmDAO = new JdbcFilmDAO();
     private final RealisateurDAO realisateurDAO = new JdbcRealisateurDAO();
+
 
     /**
      * Calcule la somme des durées d'une liste de films
@@ -73,20 +76,33 @@ public class MyFilmsServiceImpl implements MyFilmsService {
         }
     }
 
+    /**
+     * création d'un film si il est bien rattaché à un réalisateur existant
+     * @param filmForm le film à créer
+     * @return le FilmDTO correspondant au film créé avec l'id du FilmForm
+     * @throws ServiceException
+     */
     public FilmDTO createFilm(FilmForm filmForm) throws ServiceException {
         try {
-            return convertFilmToFilmDTO(convertFilmFormToFilm(filmForm));
+            Film newFilm = convertFilmFormToFilm(filmForm);
+            newFilm = filmDAO.save(newFilm);
+            return convertFilmToFilmDTO(newFilm);
         } catch (Exception e) {
             throw new ServiceException(e.getMessage());
         }
     }
 
+    /**
+     * Renvoie la liste de tous les réalisateurs
+     * @return la liste des realisateurDTOs
+     * @throws ServiceException
+     */
     public List<RealisateurDTO> findAllRealisateurs () throws ServiceException {
         try {
             List<Realisateur> liste = realisateurDAO.findAll();
             return convertRealisateurToRealisateurDTOs(liste);
         } catch (Exception e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServiceException(e.getMessage()) ;
         }
     }
 

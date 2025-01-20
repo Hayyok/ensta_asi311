@@ -4,6 +4,7 @@ import com.ensta.myfilmlist.dao.FilmDAO;
 import com.ensta.myfilmlist.model.Film;
 import com.ensta.myfilmlist.model.Realisateur;
 import com.ensta.myfilmlist.persistence.ConnectionManager;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -19,22 +20,25 @@ public class JdbcFilmDAO implements FilmDAO {
 
     @Override
     public List<Film> findAll() {
-        String query = "SELECT id, titre, duree, realisateurId FROM Film";
+        String query = "SELECT id, titre, duree, realisateur_id FROM Film";
 
         RowMapper<Film> rowMapper = (resultSet, rowNum) -> {
             Film film = new Film();
             film.setId(resultSet.getInt("id"));
             film.setTitre(resultSet.getString("titre"));
             film.setDuree(resultSet.getInt("duree"));
-            film.setRealisateurId(resultSet.getInt("realisateurId"));
+            film.setRealisateurId(resultSet.getInt("realisateur_id"));
             return film;
         };
-
-        return jdbcTemplate.query(query, rowMapper);
+        try {
+            return jdbcTemplate.query(query, rowMapper);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     public Film save(Film film) {
-        String CREATE_FILM_QUERY = "INSERT INTO Film (id, titre, duree, realisateur_id) VALUES (?, ?, ?)";
+        String CREATE_FILM_QUERY = "INSERT INTO Film (titre, duree, realisateur_id) VALUES (?, ?, ?)";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         PreparedStatementCreator creator = conn -> {

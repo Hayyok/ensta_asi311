@@ -11,7 +11,7 @@ public class Realisateur {
     private String nom;
     private String prenom;
     private LocalDate dateNaissance;
-    private List<Film> filmRealises;
+    private List<Long> filmRealises;
     private boolean celebre;
 
     // Getters et Setters
@@ -43,10 +43,10 @@ public class Realisateur {
         this.dateNaissance = dateNaissance;
     }
 
-    public List<Film> getFilmRealises() {
+    public List<Long> getFilmRealises() {
         return filmRealises;
     }
-    public void setFilmRealises(List<Film> filmRealises) {
+    public void setFilmRealises(List<Long> filmRealises) {
         this.filmRealises = filmRealises;
     }
 

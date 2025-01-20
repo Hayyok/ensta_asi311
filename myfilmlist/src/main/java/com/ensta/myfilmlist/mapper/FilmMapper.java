@@ -69,6 +69,7 @@ public class FilmMapper {
 		Film film = new Film();
 		film.setTitre(filmForm.getTitre());
 		film.setDuree(filmForm.getDuree());
+		film.setRealisateurId(filmForm.getRealisateurId());
 
 		return film;
 	}

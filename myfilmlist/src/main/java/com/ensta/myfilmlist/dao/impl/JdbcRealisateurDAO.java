@@ -23,7 +23,7 @@ public class JdbcRealisateurDAO implements RealisateurDAO {
         realisateur.setId(resultSet.getLong("id"));
         realisateur.setNom(resultSet.getString("nom"));
         realisateur.setPrenom(resultSet.getString("prenom"));
-        realisateur.setDateNaissance(resultSet.getDate("dateNaissance").toLocalDate());
+        realisateur.setDateNaissance(resultSet.getDate("date_naissance").toLocalDate());
         realisateur.setCelebre(resultSet.getBoolean("celebre"));
 
         List<Film> films = findFilmsByRealisateurId(realisateur.getId());
@@ -40,18 +40,26 @@ public class JdbcRealisateurDAO implements RealisateurDAO {
             film.setDuree(resultSet.getInt("duree"));
             return film;
         };
-        return jdbcTemplate.query(query, filmRowMapper, realisateurId);
+        try {
+            return jdbcTemplate.query(query, filmRowMapper, realisateurId);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     @Override
     public List<Realisateur> findAll() {
-        String query = "SELECT id, nom, prenom, dateNaissance, celebre FROM Realisateur";
-        return jdbcTemplate.query(query, realisateurRowMapper);
+        String query = "SELECT id, nom, prenom, date_naissance, celebre FROM Realisateur";
+        try {
+            return jdbcTemplate.query(query, realisateurRowMapper);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     @Override
     public Realisateur findByNomAndPrenom(String nom, String prenom) {
-        String query = "SELECT id, nom, prenom, dateNaissance, celebre FROM Realisateur WHERE nom = ? AND prenom = ?";
+        String query = "SELECT id, nom, prenom, date_naissance, celebre FROM Realisateur WHERE nom = ? AND prenom = ?";
         try {
             return jdbcTemplate.queryForObject(query, realisateurRowMapper, nom, prenom);
         } catch (EmptyResultDataAccessException e) {
@@ -61,7 +69,7 @@ public class JdbcRealisateurDAO implements RealisateurDAO {
 
     @Override
     public Optional<Realisateur> findById(long id) {
-        String query = "SELECT id, nom, prenom, dateNaissance, celebre FROM Realisateur WHERE id = ?";
+        String query = "SELECT id, nom, prenom, date_naissance, celebre FROM Realisateur WHERE id = ?";
         try {
             Realisateur realisateur = jdbcTemplate.queryForObject(query, realisateurRowMapper, id);
             return Optional.of(realisateur);
