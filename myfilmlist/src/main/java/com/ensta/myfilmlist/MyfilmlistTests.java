@@ -168,12 +168,21 @@ public class MyfilmlistTests {
 
 			System.out.println("Le nouveau film 'Titanic' possede l'id : " + newFilm.getId());
 
+			FilmForm titanic2 = new FilmForm();
+			titanic.setTitre("Titanic 2");
+			titanic.setDuree(195);
+			titanic.setRealisateurId(realisateurDTO.getId());
+
+			FilmDTO newFilm2 = myFilmsService.createFilm(titanic2);
+
+			System.out.println("Le nouveau film 'Titanic 2' possede l'id : " + newFilm2.getId());
+
 			List<FilmDTO> films = myFilmsService.findAllFilms();
 
 			// Attendue : 5
 			System.out.println("Combien y a-t-il de films ? " + films.size());
 
-			films.forEach(f -> System.out.println("Le realisateur du film : '" + f.getTitre() + "' est : " + f.getRealisateurDTOId()));
+			films.forEach(f -> System.out.println("id du film : " + f.getId() + "Le realisateur du film : '" + f.getTitre() + "' est : " + f.getRealisateurDTOId()));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}

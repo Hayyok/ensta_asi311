@@ -20,14 +20,14 @@ public class JdbcFilmDAO implements FilmDAO {
 
     @Override
     public List<Film> findAll() {
-        String query = "SELECT id, titre, duree, realisateurId FROM Film";
+        String query = "SELECT id, titre, duree, realisateur_id FROM Film";
 
         RowMapper<Film> rowMapper = (resultSet, rowNum) -> {
             Film film = new Film();
             film.setId(resultSet.getInt("id"));
             film.setTitre(resultSet.getString("titre"));
             film.setDuree(resultSet.getInt("duree"));
-            film.setRealisateurId(resultSet.getInt("realisateurId"));
+            film.setRealisateurId(resultSet.getInt("realisateur_id"));
             return film;
         };
         try {
@@ -38,7 +38,7 @@ public class JdbcFilmDAO implements FilmDAO {
     }
 
     public Film save(Film film) {
-        String CREATE_FILM_QUERY = "INSERT INTO Film (id, titre, duree, realisateur_id) VALUES (?, ?, ?)";
+        String CREATE_FILM_QUERY = "INSERT INTO Film (titre, duree, realisateur_id) VALUES (?, ?, ?)";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         PreparedStatementCreator creator = conn -> {

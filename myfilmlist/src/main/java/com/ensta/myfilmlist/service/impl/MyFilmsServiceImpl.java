@@ -81,7 +81,9 @@ public class MyFilmsServiceImpl implements MyFilmsService {
      */
     public FilmDTO createFilm(FilmForm filmForm) throws ServiceException {
         try {
-            return convertFilmToFilmDTO(convertFilmFormToFilm(filmForm));
+            Film newFilm = convertFilmFormToFilm(filmForm);
+            newFilm = filmDAO.save(newFilm);
+            return convertFilmToFilmDTO(newFilm);
         } catch (Exception e) {
             throw new ServiceException(e.getMessage());
         }
