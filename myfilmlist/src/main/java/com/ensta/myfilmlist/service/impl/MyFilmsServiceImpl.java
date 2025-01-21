@@ -84,14 +84,13 @@ public class MyFilmsServiceImpl implements MyFilmsService {
         try {
             Film newFilm = convertFilmFormToFilm(filmForm);
             newFilm = filmDAO.save(newFilm);
-
             Optional<Realisateur> realisateurOpt = realisateurDAO.findById(newFilm.getRealisateurId());
             if (realisateurOpt.isPresent()) {
                 Realisateur realisateur = realisateurOpt.get();
                 List<Film> filmRealises = filmDAO.findByRealisateurId(realisateur.getId());
                 realisateur.setFilmRealises(filmRealises);
-                Realisateur newRealisateur=MyFilmsService.updateRealisateurCelebre(realisateur);
-                realisateurDAO.update(newRealisateur);
+                realisateur=MyFilmsService.updateRealisateurCelebre(realisateur);
+                realisateurDAO.update(realisateur);
             }
 
             return convertFilmToFilmDTO(newFilm);
@@ -145,20 +144,18 @@ public class MyFilmsServiceImpl implements MyFilmsService {
         try{
             Optional<Film> filmOpt = filmDAO.findById(id);
             if (filmOpt.isEmpty()){
-                throw new ServiceException("Film introuvable pour cet identifiant");
+                throw new ServiceException("Suppression d'un film : film introuvable pour cet identifiant");
             }
-
             Film film = filmOpt.get();
             Optional<Realisateur> realisateurOpt = realisateurDAO.findById(film.getRealisateurId());
 
             filmDAO.delete(film);
-
-            if (realisateurOpt.isPresent()){
+            if (realisateurOpt.isPresent()) {
                 Realisateur realisateur = realisateurOpt.get();
-                List<Film> filmsRealises = filmDAO.findByRealisateurId(realisateur.getId());
-                realisateur.setFilmRealises(filmsRealises);
-                Realisateur newRealisateur=MyFilmsService.updateRealisateurCelebre(realisateur);
-                realisateurDAO.update(newRealisateur);
+                List<Film> filmRealises = filmDAO.findByRealisateurId(realisateur.getId());
+                realisateur.setFilmRealises(filmRealises);
+                realisateur=MyFilmsService.updateRealisateurCelebre(realisateur);
+                realisateurDAO.update(realisateur);
             }
 
         } catch (Exception e) {

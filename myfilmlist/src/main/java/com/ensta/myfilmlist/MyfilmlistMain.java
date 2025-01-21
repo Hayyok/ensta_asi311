@@ -24,13 +24,13 @@ public class MyfilmlistMain {
 		// ConnectionManager.createWebServer();
 
 		System.out.println("--------------------");
-		myFilmListTests.updateRealisateurCelebreTest();
+		//myFilmListTests.updateRealisateurCelebreTest();
 
 		System.out.println("--------------------");
-		myFilmListTests.calculerDureeTotaleTest();
+		//myFilmListTests.calculerDureeTotaleTest();
 
 		System.out.println("--------------------");
-		myFilmListTests.calculerNoteMoyenneTest();
+		//myFilmListTests.calculerNoteMoyenneTest();
 
 		System.out.println("--------------------");
 		myFilmListTests.findAllFilmsTest();

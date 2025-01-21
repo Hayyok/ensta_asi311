@@ -22,6 +22,7 @@ public class MyfilmlistTests {
 	/**
 	 * Permet de tester la mise a jour du statut "celebre" d'un RealisateurDTO en fonction du nombre de films realises.
 	 */
+
 	public void updateRealisateurCelebreTest() {
 //		// Creation des Realisateurs
 //
@@ -147,6 +148,7 @@ public class MyfilmlistTests {
 			System.out.println("Combien y a-t-il de films ? " + films.size());
 
 			films.forEach(System.out::println);
+
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}

@@ -63,6 +63,7 @@ public class JdbcFilmDAO implements FilmDAO {
             film.setId(resultSet.getInt("id"));
             film.setTitre(resultSet.getString("titre"));
             film.setDuree(resultSet.getInt("duree"));
+            film.setRealisateurId(resultSet.getInt("realisateur_id"));
             return film;
         };
         try {

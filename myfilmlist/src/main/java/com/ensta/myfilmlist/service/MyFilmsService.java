@@ -29,15 +29,12 @@ public interface MyFilmsService {
         if (realisateur == null) {
             throw new ServiceException("Le réalisateur ne peut pas être null.");
         }
-
         if (realisateur.getFilmRealises() == null) {
             throw new ServiceException("La liste des films réalisés ne peut pas être null.");
         }
-
         // Mise à jour du statut celebre
         boolean estCelebre = (realisateur.getFilmRealises().size() >= NB_FILMS_MIN_REALISATEUR_CELEBRE);
         realisateur.setCelebre(estCelebre);
-
         return realisateur;
     }
 
