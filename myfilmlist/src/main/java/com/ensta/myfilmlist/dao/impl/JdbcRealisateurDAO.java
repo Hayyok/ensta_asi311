@@ -4,6 +4,7 @@ import com.ensta.myfilmlist.dao.RealisateurDAO;
 import com.ensta.myfilmlist.model.Realisateur;
 import com.ensta.myfilmlist.persistence.ConnectionManager;
 import com.ensta.myfilmlist.service.ServiceException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -11,13 +12,17 @@ import org.springframework.jdbc.core.RowMapper;
 import com.ensta.myfilmlist.model.Film;
 import com.ensta.myfilmlist.model.Realisateur;
 import com.ensta.myfilmlist.service.MyFilmsService;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class JdbcRealisateurDAO implements RealisateurDAO {
     static final int NB_FILMS_MIN_REALISATEUR_CELEBRE = 3;
-    private JdbcTemplate jdbcTemplate = ConnectionManager.getJdbcTemplate();
+    //private JdbcTemplate jdbcTemplate = ConnectionManager.getJdbcTemplate();
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
     // RowMapper for Realisateur
     private final RowMapper<Realisateur> realisateurRowMapper = (resultSet, rowNum) -> {

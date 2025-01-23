@@ -4,20 +4,25 @@ import com.ensta.myfilmlist.dao.FilmDAO;
 import com.ensta.myfilmlist.model.Film;
 import com.ensta.myfilmlist.model.Realisateur;
 import com.ensta.myfilmlist.persistence.ConnectionManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class JdbcFilmDAO implements FilmDAO {
-    private JdbcTemplate jdbcTemplate = ConnectionManager.getJdbcTemplate();
+    //private JdbcTemplate jdbcTemplate = ConnectionManager.getJdbcTemplate();
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public List<Film> findAll() {

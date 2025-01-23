@@ -11,7 +11,9 @@ import com.ensta.myfilmlist.model.Film;
 import com.ensta.myfilmlist.model.Realisateur;
 import com.ensta.myfilmlist.service.MyFilmsService;
 import com.ensta.myfilmlist.service.ServiceException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
 
 import java.security.Provider;
 import java.util.*;
@@ -21,10 +23,16 @@ import java.util.stream.Stream;
 import static com.ensta.myfilmlist.mapper.FilmMapper.*;
 import static com.ensta.myfilmlist.mapper.RealisateurMapper.*;
 
+@Service
 public class MyFilmsServiceImpl implements MyFilmsService {
     private static final int NB_FILMS_MIN_REALISATEUR_CELEBRE = 3;
-    private final FilmDAO filmDAO = new JdbcFilmDAO();
-    private final RealisateurDAO realisateurDAO = new JdbcRealisateurDAO();
+    //private final FilmDAO filmDAO = new JdbcFilmDAO();
+    //private final RealisateurDAO realisateurDAO = new JdbcRealisateurDAO();
+    @Autowired
+    private FilmDAO filmDAO;
+
+    @Autowired
+    private RealisateurDAO realisateurDAO;
 
     /**
      * Calcule la somme des durées d'une liste de films
