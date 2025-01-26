@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 
 import org.springframework.http.ResponseEntity;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Api(tags = "Film")
@@ -35,7 +36,7 @@ public interface FilmResource {
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Le film a bien été créé")
     })
-    ResponseEntity<FilmDTO> createFilm(FilmForm filmForm) throws ControllerException ;
+    ResponseEntity<FilmDTO> createFilm(@Valid FilmForm filmForm) throws ControllerException ;
 
     @ApiOperation(value = "Suppression d'un film", notes = "Permet de supprimer un film en fonction de l'id", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiResponses(value = {

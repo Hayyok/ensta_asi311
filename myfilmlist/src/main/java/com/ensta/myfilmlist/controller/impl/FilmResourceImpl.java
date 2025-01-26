@@ -9,12 +9,14 @@ import com.ensta.myfilmlist.service.ServiceException;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import java.util.List;
 
 @RestController
 @RequestMapping("/film")
+@Validated
 public class FilmResourceImpl implements FilmResource {
     @Autowired
     private MyFilmsService myFilmsService;
@@ -64,6 +66,16 @@ public class FilmResourceImpl implements FilmResource {
             FilmDTO film = myFilmsService.createFilm(filmForm);
             return ResponseEntity.status(HttpStatus.CREATED).body(film);
         } catch (ServiceException e) {
+            throw new ControllerException(e);
+        }
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> deleteFilm(@PathVariable long id) throws ControllerException {
+        try {
+            myFilmsService.deleteFilm(id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        } catch (Exception e) {
             throw new ControllerException(e);
         }
     }

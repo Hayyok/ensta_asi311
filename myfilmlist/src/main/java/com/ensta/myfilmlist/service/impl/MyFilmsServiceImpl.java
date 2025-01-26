@@ -91,8 +91,11 @@ public class MyFilmsServiceImpl implements MyFilmsService {
     public FilmDTO createFilm(FilmForm filmForm) throws ServiceException {
         try {
             Film newFilm = convertFilmFormToFilm(filmForm);
-            newFilm = filmDAO.save(newFilm);
             Optional<Realisateur> realisateurOpt = realisateurDAO.findById(newFilm.getRealisateurId());
+            if (realisateurOpt.isEmpty()) {
+                throw new ServiceException("Le realisateur n'existe pas");
+            }
+            newFilm = filmDAO.save(newFilm);
             if (realisateurOpt.isPresent()) {
                 Realisateur realisateur = realisateurOpt.get();
                 List<Film> filmRealises = filmDAO.findByRealisateurId(realisateur.getId());
@@ -100,7 +103,6 @@ public class MyFilmsServiceImpl implements MyFilmsService {
                 realisateur=MyFilmsService.updateRealisateurCelebre(realisateur);
                 realisateurDAO.update(realisateur);
             }
-
             return convertFilmToFilmDTO(newFilm);
         } catch (Exception e) {
             throw new ServiceException(e.getMessage());
