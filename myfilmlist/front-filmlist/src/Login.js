@@ -13,9 +13,10 @@ export default function Login({ onLoginSuccess }) {
         e.preventDefault();
         try {
             const response = await login(username, password);
+            console.log("Réponse après login :", response);
             if (response.success) {
                 setError(null);
-                onLoginSuccess(response); // Passe les infos utilisateur au composant parent
+                onLoginSuccess(response); // Passe toutes les infos utilisateur
             }
         } catch (err) {
             setError(err.message);

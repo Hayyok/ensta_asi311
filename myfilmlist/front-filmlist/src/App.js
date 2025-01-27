@@ -1,18 +1,25 @@
 import React, { useState } from "react";
 import Login from "./Login";
 import FilmContainer from "./FilmContainer";
+import AdminPanel from "./AdminPanel";
 
 export default function App() {
     const [user, setUser] = useState(null);
 
     const handleLoginSuccess = (userData) => {
-        setUser(userData); // Stocke les données utilisateur une fois connecté
+        console.log("handleLoginSuccess appelé avec :", userData);
+        setUser(userData);
+        console.log(userData.role === "admin");
     };
 
     return (
         <div>
             {user ? (
-                <FilmContainer userId={user.userId} />
+                user.role === "admin" ? (
+                    <AdminPanel role={user.role} />
+                ) : (
+                    <FilmContainer userId={user.userId} />
+                )
             ) : (
                 <Login onLoginSuccess={handleLoginSuccess} />
             )}
