@@ -2,23 +2,18 @@ package com.ensta.myfilmlist.service.impl;
 
 import com.ensta.myfilmlist.dao.FilmDAO;
 import com.ensta.myfilmlist.dao.RealisateurDAO;
-import com.ensta.myfilmlist.dao.impl.JdbcFilmDAO;
-import com.ensta.myfilmlist.dao.impl.JdbcRealisateurDAO;
 import com.ensta.myfilmlist.dto.FilmDTO;
 import com.ensta.myfilmlist.dto.RealisateurDTO;
 import com.ensta.myfilmlist.form.FilmForm;
+import com.ensta.myfilmlist.form.RealisateurForm;
 import com.ensta.myfilmlist.model.Film;
 import com.ensta.myfilmlist.model.Realisateur;
 import com.ensta.myfilmlist.service.MyFilmsService;
 import com.ensta.myfilmlist.service.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import java.security.Provider;
 import java.util.*;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import static com.ensta.myfilmlist.mapper.FilmMapper.*;
 import static com.ensta.myfilmlist.mapper.RealisateurMapper.*;
@@ -172,4 +167,23 @@ public class MyFilmsServiceImpl implements MyFilmsService {
             throw new ServiceException(e.getMessage());
         }
     }
+
+    /**
+     * création d'un rélisateur
+     * @param realisateurForm le réalisateur à créer
+     * @return le RealisateurDTO correspondant au réalisateur créé avec l'id du RealisateurForm
+     * @throws ServiceException
+     */
+    @Override
+    public RealisateurDTO createRealisateur(RealisateurForm realisateurForm) throws ServiceException {
+        try {
+            Realisateur newRealisateur = convertRealisateurFormToRealisateur(realisateurForm);
+            newRealisateur = realisateurDAO.save(newRealisateur);
+            return convertRealisateurToRealisateurDTO(newRealisateur);
+        } catch (Exception e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
+
+
 }

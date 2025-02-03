@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.ensta.myfilmlist.dto.RealisateurDTO;
+import com.ensta.myfilmlist.form.FilmForm;
+import com.ensta.myfilmlist.form.RealisateurForm;
+import com.ensta.myfilmlist.model.Film;
 import com.ensta.myfilmlist.model.Realisateur;
 
 /**
@@ -54,6 +57,21 @@ public class RealisateurMapper {
         realisateur.setDateNaissance(realisateurDTO.getDateNaissance());
         realisateur.setCelebre(realisateurDTO.isCelebre());
 
+        return realisateur;
+    }
+
+    /**
+     * Convertit un Form en realisateur.
+     *
+     * @param realisateurForm le Form a convertir
+     * @return Un Realisateur construit a partir des donnes du Form.
+     */
+    public static Realisateur convertRealisateurFormToRealisateur(RealisateurForm realisateurForm) {
+        Realisateur realisateur = new Realisateur();
+        realisateur.setNom(realisateurForm.getNom());
+        realisateur.setPrenom(realisateurForm.getPrenom());
+        realisateur.setDateNaissance(realisateurForm.getDateNaissance());
+        realisateur.setCelebre(false);
         return realisateur;
     }
 }

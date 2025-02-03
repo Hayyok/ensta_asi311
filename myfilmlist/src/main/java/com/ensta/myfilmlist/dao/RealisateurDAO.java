@@ -12,5 +12,7 @@ public interface RealisateurDAO {
 
     Optional<Realisateur> findById(long id);
 
+    Realisateur save(Realisateur realisateur);
+
     Realisateur update(Realisateur realisateur);
 }

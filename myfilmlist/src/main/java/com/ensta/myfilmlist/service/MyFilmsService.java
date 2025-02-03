@@ -4,6 +4,7 @@ import com.ensta.myfilmlist.dao.impl.JdbcRealisateurDAO;
 import com.ensta.myfilmlist.dto.FilmDTO;
 import com.ensta.myfilmlist.dto.RealisateurDTO;
 import com.ensta.myfilmlist.form.FilmForm;
+import com.ensta.myfilmlist.form.RealisateurForm;
 import com.ensta.myfilmlist.model.Realisateur;
 import com.ensta.myfilmlist.model.Film;
 
@@ -86,4 +87,6 @@ public interface MyFilmsService {
     FilmDTO findFilmById(long id) throws ServiceException;
 
     void deleteFilm(long id) throws ServiceException;
+
+    RealisateurDTO createRealisateur(RealisateurForm realisateurForm) throws ServiceException;
 }
