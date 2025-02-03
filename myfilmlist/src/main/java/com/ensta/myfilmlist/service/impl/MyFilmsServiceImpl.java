@@ -12,6 +12,7 @@ import com.ensta.myfilmlist.service.MyFilmsService;
 import com.ensta.myfilmlist.service.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -83,6 +84,7 @@ public class MyFilmsServiceImpl implements MyFilmsService {
      * @throws ServiceException
      */
     @Override
+    @Transactional
     public FilmDTO createFilm(FilmForm filmForm) throws ServiceException {
         try {
             Film newFilm = convertFilmFormToFilm(filmForm);
@@ -90,14 +92,15 @@ public class MyFilmsServiceImpl implements MyFilmsService {
             if (realisateurOpt.isEmpty()) {
                 throw new ServiceException("Le realisateur n'existe pas");
             }
+
             newFilm = filmDAO.save(newFilm);
-            if (realisateurOpt.isPresent()) {
-                Realisateur realisateur = realisateurOpt.get();
-                List<Film> filmRealises = filmDAO.findByRealisateurId(realisateur.getId());
-                realisateur.setFilmRealises(filmRealises);
-                realisateur=MyFilmsService.updateRealisateurCelebre(realisateur);
-                realisateurDAO.update(realisateur);
-            }
+
+            Realisateur realisateur = realisateurOpt.get();
+            List<Film> filmRealises = filmDAO.findByRealisateurId(realisateur.getId());
+            realisateur.setFilmRealises(filmRealises);
+            realisateur=MyFilmsService.updateRealisateurCelebre(realisateur);
+            realisateurDAO.update(realisateur);
+
             return convertFilmToFilmDTO(newFilm);
         } catch (Exception e) {
             throw new ServiceException(e.getMessage());
@@ -109,6 +112,7 @@ public class MyFilmsServiceImpl implements MyFilmsService {
      * @return la liste des realisateurDTOs
      * @throws ServiceException
      */
+    @Override
     public List<RealisateurDTO> findAllRealisateurs () throws ServiceException {
         try {
             List<Realisateur> liste = realisateurDAO.findAll();
@@ -118,6 +122,7 @@ public class MyFilmsServiceImpl implements MyFilmsService {
         }
     }
 
+    @Override
     public RealisateurDTO findRealisateurByNomAndPrenom(String nom, String prenom) throws ServiceException {
         try {
             Realisateur realisateur = realisateurDAO.findByNomAndPrenom(nom, prenom);
@@ -127,6 +132,7 @@ public class MyFilmsServiceImpl implements MyFilmsService {
         }
     }
 
+    @Override
     public Optional<RealisateurDTO> findRealisateurDTOById(long id) throws ServiceException {
         try {
             Realisateur realisateur = realisateurDAO.findById(id).get();
@@ -136,6 +142,7 @@ public class MyFilmsServiceImpl implements MyFilmsService {
         }
     }
 
+    @Override
     public FilmDTO findFilmById(long id) throws ServiceException {
         try{
             Film film = filmDAO.findById(id).get();
@@ -145,6 +152,8 @@ public class MyFilmsServiceImpl implements MyFilmsService {
         }
     }
 
+    @Override
+    @Transactional
     public void deleteFilm(long id) throws ServiceException {
         try{
             Optional<Film> filmOpt = filmDAO.findById(id);
