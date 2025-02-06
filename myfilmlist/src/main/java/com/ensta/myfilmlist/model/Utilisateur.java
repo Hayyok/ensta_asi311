@@ -1,9 +1,12 @@
 package com.ensta.myfilmlist.model;
 
+import java.util.List;
+
 public class Utilisateur {
     private long id;
     private String nom;
     private String prenom;
+    private List<Film> filmsFavoris;
 
     // Getters et Setters
     public long getId() {
@@ -26,4 +29,7 @@ public class Utilisateur {
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
+
+    public List<Film> getFilmsFavoris() { return filmsFavoris; }
+    public void setFilmsFavoris(List<Film> filmsFavoris) { this.filmsFavoris = filmsFavoris; }
 }
