@@ -3,6 +3,7 @@ import FilmList from "./FilmList";
 import CreateFilmForm from "./CreateFilmForm";
 import { getAllFilms, postFilm, putFilm, deleteFilm } from "./api/FilmAPI";
 
+
 export default function FilmContainer() {
     const [films, setFilms] = useState([]);
 
@@ -12,7 +13,7 @@ export default function FilmContainer() {
             .catch((err) => console.error(err));
     }, []);
 
-    const handleCreateFilm = (film) => {
+    /*const handleCreateFilm = (film) => {
         postFilm(film)
             .then(() => getAllFilms())
             .then((response) => setFilms(response.data))
@@ -31,16 +32,20 @@ export default function FilmContainer() {
             .then(() => getAllFilms())
             .then((response) => setFilms(response.data))
             .catch((err) => console.error(err));
-    };
+    };*/
 
     return (
         <div>
-            <CreateFilmForm onSubmit={handleCreateFilm} />
             <FilmList
                 films={films}
-                onUpdateFilm={handleUpdateFilm}
-                onDeleteFilm={handleDeleteFilm}
+                //onUpdateFilm={handleUpdateFilm}
+                //onDeleteFilm={handleDeleteFilm}
             />
         </div>
     );
 }
+
+/* avant FilmList
+            <CreateFilmForm onSubmit={handleCreateFilm} />
+
+ */

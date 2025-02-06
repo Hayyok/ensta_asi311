@@ -2,13 +2,26 @@ package com.ensta.myfilmlist.model;
 
 import com.ensta.myfilmlist.dto.RealisateurDTO;
 
+import javax.persistence.*;
+
 /**
  * Represente un Film.
  */
+//@Entity
+//@Table(name= "film")
 public class Film {
+
+	//@Id
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+
+	//@Column(name = "title")
 	private String titre;
+
 	private int duree;
+
+	//@ManyToOne
+	//@JoinColumn(nullable = false)
 	private long realisateurId;
 
 	// Getters et Setters

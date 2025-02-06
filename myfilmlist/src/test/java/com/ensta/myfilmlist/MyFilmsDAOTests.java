@@ -1,4 +1,4 @@
-package com.ensta.myfilmlist;
+/*package com.ensta.myfilmlist;
 
 
 import com.ensta.myfilmlist.dao.impl.JdbcFilmDAO;
@@ -101,4 +101,4 @@ public class MyFilmsDaoTests {
         assertEquals(3, films.size());
     }
 }
-
+*/

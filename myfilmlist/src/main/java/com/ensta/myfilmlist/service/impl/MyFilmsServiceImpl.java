@@ -108,6 +108,24 @@ public class MyFilmsServiceImpl implements MyFilmsService {
     }
 
     /**
+     * création d'un rélisateur
+     * @param realisateurForm le réalisateur à créer
+     * @return le RealisateurDTO correspondant au réalisateur créé avec l'id du RealisateurForm
+     * @throws ServiceException
+     */
+    @Override
+    public RealisateurDTO createRealisateur(RealisateurForm realisateurForm) throws ServiceException {
+        try {
+            Realisateur newRealisateur = convertRealisateurFormToRealisateur(realisateurForm);
+            newRealisateur = realisateurDAO.save(newRealisateur);
+            return convertRealisateurToRealisateurDTO(newRealisateur);
+        } catch (Exception e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
+
+
+    /**
      * Renvoie la liste de tous les réalisateurs
      * @return la liste des realisateurDTOs
      * @throws ServiceException
@@ -155,9 +173,9 @@ public class MyFilmsServiceImpl implements MyFilmsService {
     @Override
     @Transactional
     public void deleteFilm(long id) throws ServiceException {
-        try{
+        try {
             Optional<Film> filmOpt = filmDAO.findById(id);
-            if (filmOpt.isEmpty()){
+            if (filmOpt.isEmpty()) {
                 throw new ServiceException("Suppression d'un film : film introuvable pour cet identifiant");
             }
             Film film = filmOpt.get();
@@ -168,7 +186,7 @@ public class MyFilmsServiceImpl implements MyFilmsService {
                 Realisateur realisateur = realisateurOpt.get();
                 List<Film> filmRealises = filmDAO.findByRealisateurId(realisateur.getId());
                 realisateur.setFilmRealises(filmRealises);
-                realisateur=MyFilmsService.updateRealisateurCelebre(realisateur);
+                realisateur = MyFilmsService.updateRealisateurCelebre(realisateur);
                 realisateurDAO.update(realisateur);
             }
 
@@ -177,22 +195,20 @@ public class MyFilmsServiceImpl implements MyFilmsService {
         }
     }
 
-    /**
-     * création d'un rélisateur
-     * @param realisateurForm le réalisateur à créer
-     * @return le RealisateurDTO correspondant au réalisateur créé avec l'id du RealisateurForm
-     * @throws ServiceException
-     */
     @Override
-    public RealisateurDTO createRealisateur(RealisateurForm realisateurForm) throws ServiceException {
+    public void deleteRealisateur(long id) throws ServiceException {
         try {
-            Realisateur newRealisateur = convertRealisateurFormToRealisateur(realisateurForm);
-            newRealisateur = realisateurDAO.save(newRealisateur);
-            return convertRealisateurToRealisateurDTO(newRealisateur);
+            Optional<Realisateur> realisateurOpt = realisateurDAO.findById(id);
+            if (realisateurOpt.isEmpty()) {
+                throw new ServiceException("Suppression d'un réalisateur : réalisateur introuvable pour cet identifiant");
+            }
+            Realisateur realisateur = realisateurOpt.get();
+            realisateurDAO.delete(realisateur);
         } catch (Exception e) {
             throw new ServiceException(e.getMessage());
         }
     }
+
 
 
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Login from "./Login";
 import FilmContainer from "./FilmContainer";
 import AdminPanel from "./AdminPanel";
+import Header from "./Header";
 
 export default function App() {
     const [user, setUser] = useState(null);
@@ -14,6 +15,12 @@ export default function App() {
 
     return (
         <div>
+            <Header/>
+            <FilmContainer/>
+        </div>
+    );
+}
+/* après le header
             {user ? (
                 user.role === "admin" ? (
                     <AdminPanel role={user.role} />
@@ -23,6 +30,4 @@ export default function App() {
             ) : (
                 <Login onLoginSuccess={handleLoginSuccess} />
             )}
-        </div>
-    );
-}
+ */

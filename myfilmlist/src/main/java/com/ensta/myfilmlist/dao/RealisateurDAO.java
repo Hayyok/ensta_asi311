@@ -15,4 +15,6 @@ public interface RealisateurDAO {
     Realisateur save(Realisateur realisateur);
 
     Realisateur update(Realisateur realisateur);
+
+    void delete(Realisateur realisateur);
 }

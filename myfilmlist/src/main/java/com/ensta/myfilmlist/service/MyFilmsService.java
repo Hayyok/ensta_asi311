@@ -89,4 +89,6 @@ public interface MyFilmsService {
     void deleteFilm(long id) throws ServiceException;
 
     RealisateurDTO createRealisateur(RealisateurForm realisateurForm) throws ServiceException;
+
+    void deleteRealisateur(long id) throws ServiceException;
 }

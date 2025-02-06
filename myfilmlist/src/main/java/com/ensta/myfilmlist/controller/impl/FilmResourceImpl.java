@@ -17,6 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/film")
 @Validated
+@CrossOrigin(origins = "http://localhost:3000/")
 public class FilmResourceImpl implements FilmResource {
     @Autowired
     private MyFilmsService myFilmsService;
@@ -54,7 +55,7 @@ public class FilmResourceImpl implements FilmResource {
     }
 
     /**
-     * Crée le film avec les paramètres donnés et le renvoie avec son identifiant une fois crée.
+     * Crée le film avec les paramètres donnés et le renvoie avec son identifiant une fois créé.
      * Code http est 201
      * @param filmForm le formulaire avec les paramètres du film
      * @return le filmDTO et son id créé

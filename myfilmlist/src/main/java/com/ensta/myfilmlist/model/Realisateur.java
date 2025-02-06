@@ -1,17 +1,26 @@
 package com.ensta.myfilmlist.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
 /**
  * Represente un Realisateur.
  */
+//@Entity
+//@Table(name = "réalisateur")
 public class Realisateur {
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String nom;
     private String prenom;
     private LocalDate dateNaissance;
+
+    //@OneToMany(mappedBy = "realisateur")
     private List<Film> filmRealises;
+
     private boolean celebre;
 
     // Getters et Setters

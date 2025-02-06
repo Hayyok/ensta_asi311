@@ -92,7 +92,7 @@ public class JdbcRealisateurDAO implements RealisateurDAO {
     }
 
     public Realisateur save(Realisateur realisateur) {
-        String CREATE_REALISATEUR_QUERY = "INSERT INTO Realisateur (nom, prenom, dateNaissance) VALUES (?, ?, ?)";
+        String CREATE_REALISATEUR_QUERY = "INSERT INTO Realisateur (nom, prenom, date_naissance) VALUES (?, ?, ?)";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         PreparedStatementCreator creator = conn -> {
@@ -120,5 +120,11 @@ public class JdbcRealisateurDAO implements RealisateurDAO {
                 realisateur.getId()
         );
         return realisateur;
+    }
+
+    @Override
+    public void delete(Realisateur realisateur) {
+        String query="DELETE FROM Realisateur WHERE id = ?";
+        jdbcTemplate.update(query, realisateur.getId());
     }
 }
