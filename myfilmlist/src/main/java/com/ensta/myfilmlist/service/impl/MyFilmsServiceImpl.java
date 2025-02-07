@@ -132,6 +132,17 @@ public class MyFilmsServiceImpl implements MyFilmsService {
         }
     }
 
+    @Override
+    public FilmDTO editFilm(long id, FilmForm filmForm) throws ServiceException {
+        try{
+            Film editedFilm = convertFilmFormToFilm(filmForm);
+            editedFilm = filmDAO.edit(id, editedFilm);
+            return convertFilmToFilmDTO(editedFilm);
+        } catch (Exception e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
+
     /**
      * création d'un utilisateur
      * @param utilisateurForm l'utilisateur à créer

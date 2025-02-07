@@ -15,4 +15,6 @@ public interface FilmDAO {
     void delete(Film film);
 
     List<Film> findByRealisateurId( long realisateurId);
+
+    Film edit(long id, Film editedFilm);
 }

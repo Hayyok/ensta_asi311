@@ -100,4 +100,20 @@ public class JdbcFilmDAO implements FilmDAO {
             return null;
         }
     }
+
+    @Override
+    public Film edit(long id, Film editedFilm) {
+        String query = "UPDATE Film SET titre = ?, duree = ?, realisateur_id = ? WHERE id = ?";
+        jdbcTemplate.update(query,
+                editedFilm.getTitre(),
+                editedFilm.getDuree(),
+                editedFilm.getRealisateurId(),
+                id);
+        Film film = new Film();
+        film.setId(id);
+        film.setTitre(editedFilm.getTitre());
+        film.setDuree(editedFilm.getDuree());
+        film.setRealisateurId(editedFilm.getRealisateurId());
+        return film;
+    }
 }

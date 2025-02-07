@@ -71,6 +71,16 @@ public class FilmResourceImpl implements FilmResource {
         }
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<FilmDTO> editFilm(@PathVariable long id, @RequestBody FilmForm filmForm) throws ControllerException {
+        try{
+            FilmDTO film = myFilmsService.editFilm(id, filmForm);
+            return ResponseEntity.status(HttpStatus.OK).body(film);
+        } catch (ServiceException e) {
+            throw new ControllerException(e);
+        }
+    }
+
     @DeleteMapping("{id}")
     public ResponseEntity<?> deleteFilm(@PathVariable long id) throws ControllerException {
         try {

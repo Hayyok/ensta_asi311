@@ -1,4 +1,4 @@
-import axios from 'axios'; // Désactivez temporairement Axios
+import axios from 'axios';
 //import { getAllRealisateurs } from "../mock/RealisateurMock";
 
 //export { getAllRealisateurs };

@@ -16,6 +16,11 @@ export default function App() {
     return (
         <div>
             <Header/>
+            <FilmContainer />
+        </div>
+    );
+}
+/* juste après le header, je le décommente parce que ça soule de devoir se reconnecter tout le temps
             {user ? (
                 user.role === "admin" ? (
                     <AdminPanel role={user.role} />
@@ -25,6 +30,4 @@ export default function App() {
             ) : (
                 <Login onLoginSuccess={handleLoginSuccess} />
             )}
-        </div>
-    );
-}
+ */

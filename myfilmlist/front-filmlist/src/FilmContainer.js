@@ -20,12 +20,12 @@ export default function FilmContainer() {
             .catch((err) => console.error(err));
     };
 
-    /*const handleUpdateFilm = (film) => {
+    const handleUpdateFilm = (film) => {
         putFilm(film.id, film)
             .then(() => getAllFilms())
             .then((response) => setFilms(response.data))
             .catch((err) => console.error(err));
-    };*/
+    };
 
     const handleDeleteFilm = (id) => {
         deleteFilm(id)
@@ -39,7 +39,7 @@ export default function FilmContainer() {
             <CreateFilmForm onSubmit={handleCreateFilm} />
             <FilmList
                 films={films}
-                //onUpdateFilm={handleUpdateFilm}
+                onUpdateFilm={handleUpdateFilm}
                 onDeleteFilm={handleDeleteFilm}
             />
         </div>

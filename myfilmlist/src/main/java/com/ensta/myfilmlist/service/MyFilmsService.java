@@ -11,6 +11,7 @@ import com.ensta.myfilmlist.model.Realisateur;
 import com.ensta.myfilmlist.model.Film;
 
 import javax.validation.Valid;
+import java.security.Provider;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -102,4 +103,6 @@ public interface MyFilmsService {
     UtilisateurDTO createUtilisateur( UtilisateurForm utilisateurForm) throws ServiceException;
 
     void deleteUtilisateur(long id) throws ServiceException;
+
+    FilmDTO editFilm(long id, FilmForm filmForm) throws ServiceException;
 }

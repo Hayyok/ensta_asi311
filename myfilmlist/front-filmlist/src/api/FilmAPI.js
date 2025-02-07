@@ -7,9 +7,9 @@ export function getAllFilms(){
 export function postFilm(){
     return axios.post(FILM_URI);
 }
-/*export function putFilm(){
-
-}*/
+export function putFilm(id){
+    return axios.put('http://localhost:8080/film/{id}')
+}
 export function deleteFilm(id){
     return axios.delete('http://localhost:8080/film/{id}');
 }

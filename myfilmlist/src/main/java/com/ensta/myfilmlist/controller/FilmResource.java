@@ -7,10 +7,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -37,6 +39,14 @@ public interface FilmResource {
             @ApiResponse(code = 201, message = "Le film a bien été créé")
     })
     ResponseEntity<FilmDTO> createFilm(@Valid FilmForm filmForm) throws ControllerException ;
+
+    @ApiOperation(value = "Modification d'un film", notes = "Permet de modifier les informations d'un film en fonction de son id et des paramètres donnés", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Le film a bien été édité")
+
+    })
+    public ResponseEntity<FilmDTO> editFilm(@PathVariable long id, @RequestBody FilmForm filmForm) throws ControllerException;
+
 
     @ApiOperation(value = "Suppression d'un film", notes = "Permet de supprimer un film en fonction de l'id", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiResponses(value = {
