@@ -37,9 +37,9 @@ public interface RealisateurResource {
     })
     ResponseEntity<RealisateurDTO> createRealisateur(@Valid RealisateurForm realisateurForm) throws ControllerException ;
 
-    /*@ApiOperation(value = "Suppression d'un réalisateur", notes = "Permet de supprimer un réalisateur en fonction de l'id", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Suppression d'un réalisateur", notes = "Permet de supprimer un réalisateur en fonction de l'id", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiResponses(value = {
             @ApiResponse(code = 204, message = "Le réalisateur a bien été supprimé")
     })
-    ResponseEntity<?> deleteRealisateur(long id) throws ControllerException;*/
+    ResponseEntity<?> deleteRealisateur(long id) throws ControllerException;
 }

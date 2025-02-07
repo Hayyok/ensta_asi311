@@ -10,7 +10,7 @@ import com.ensta.myfilmlist.model.Film;
 import com.ensta.myfilmlist.model.Realisateur;
 
 /**
- * Effectue les conversions des Films entre les couches de l'application.
+ * Effectue les conversions des Realisateurs entre les couches de l'application.
  */
 public class RealisateurMapper {
 

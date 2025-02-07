@@ -39,7 +39,7 @@ public class RealisateurResourceImpl implements RealisateurResource {
     }
 
     /**
-     * Renvoie le realisaeur ayant l'identifiant donné ou une erreur 404 si la ressource n'a pas été trouvé
+     * Renvoie le realisateur ayant l'identifiant donné ou une erreur 404 si la ressource n'a pas été trouvée
      * @param id l'identifiant du realisateur à trouver
      * @return le RealisateurDTO correspondant à l'identifiant ou une erreur 404 si pas de realisateur trouvé
      * @throws ControllerException en cas d'erreur de traitement
@@ -74,7 +74,7 @@ public class RealisateurResourceImpl implements RealisateurResource {
         }
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteRealisateur(@PathVariable long id) throws ControllerException {
         try {
             myFilmsService.deleteRealisateur(id);

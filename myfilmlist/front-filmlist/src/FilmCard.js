@@ -7,13 +7,13 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function FilmCard({ film, onEdit, onDelete }) {
-    /*const handleClickOnDeleteButton = () => {
+    const handleClickOnDeleteButton = () => {
         if (onDelete) onDelete(film.id);
     };
 
     const handleClickOnEditButton = () => {
         if (onEdit) onEdit(film);
-    };*/
+    };
 
     return (
         <Card variant="outlined" sx={{ marginBottom: 2 }}>
@@ -24,16 +24,14 @@ export default function FilmCard({ film, onEdit, onDelete }) {
                 <Typography variant="body1">
                     {film.duree} minutes
                 </Typography>
-            </CardContent>
-        </Card>
-    );
-}
-
-/* dans le cardcontent après typographie
                 <IconButton onClick={handleClickOnEditButton}>
                     <EditIcon />
                 </IconButton>
                 <IconButton onClick={handleClickOnDeleteButton}>
                     <DeleteIcon />
                 </IconButton>
- */
+            </CardContent>
+        </Card>
+    );
+}
+

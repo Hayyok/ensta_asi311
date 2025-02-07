@@ -16,11 +16,6 @@ export default function App() {
     return (
         <div>
             <Header/>
-            <FilmContainer/>
-        </div>
-    );
-}
-/* après le header
             {user ? (
                 user.role === "admin" ? (
                     <AdminPanel role={user.role} />
@@ -30,4 +25,6 @@ export default function App() {
             ) : (
                 <Login onLoginSuccess={handleLoginSuccess} />
             )}
- */
+        </div>
+    );
+}

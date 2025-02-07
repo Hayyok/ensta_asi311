@@ -44,7 +44,8 @@ public class JdbcRealisateurDAO implements RealisateurDAO {
         return realisateur;
     };
 
-    private List<Film> findFilmsByRealisateurId(long realisateurId) {
+    @Override
+    public List<Film> findFilmsByRealisateurId(long realisateurId) {
         String query = "SELECT f.id, f.titre, f.duree FROM Film f WHERE f.realisateur_id = ?";
         RowMapper<Film> filmRowMapper = (resultSet, rowNum) -> {
             Film film = new Film();

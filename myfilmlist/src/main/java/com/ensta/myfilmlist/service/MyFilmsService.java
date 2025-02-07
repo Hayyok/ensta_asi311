@@ -3,11 +3,14 @@ import com.ensta.myfilmlist.dao.RealisateurDAO;
 import com.ensta.myfilmlist.dao.impl.JdbcRealisateurDAO;
 import com.ensta.myfilmlist.dto.FilmDTO;
 import com.ensta.myfilmlist.dto.RealisateurDTO;
+import com.ensta.myfilmlist.dto.UtilisateurDTO;
 import com.ensta.myfilmlist.form.FilmForm;
 import com.ensta.myfilmlist.form.RealisateurForm;
+import com.ensta.myfilmlist.form.UtilisateurForm;
 import com.ensta.myfilmlist.model.Realisateur;
 import com.ensta.myfilmlist.model.Film;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -91,4 +94,12 @@ public interface MyFilmsService {
     RealisateurDTO createRealisateur(RealisateurForm realisateurForm) throws ServiceException;
 
     void deleteRealisateur(long id) throws ServiceException;
+
+    List<UtilisateurDTO> findAllUtilisateurs() throws ServiceException;
+
+    Optional<UtilisateurDTO> findUtilisateurDTOById(long id);
+
+    UtilisateurDTO createUtilisateur( UtilisateurForm utilisateurForm) throws ServiceException;
+
+    void deleteUtilisateur(long id) throws ServiceException;
 }

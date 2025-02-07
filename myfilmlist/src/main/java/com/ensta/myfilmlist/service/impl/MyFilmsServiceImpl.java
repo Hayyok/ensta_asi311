@@ -2,12 +2,16 @@ package com.ensta.myfilmlist.service.impl;
 
 import com.ensta.myfilmlist.dao.FilmDAO;
 import com.ensta.myfilmlist.dao.RealisateurDAO;
+import com.ensta.myfilmlist.dao.UtilisateurDAO;
 import com.ensta.myfilmlist.dto.FilmDTO;
 import com.ensta.myfilmlist.dto.RealisateurDTO;
+import com.ensta.myfilmlist.dto.UtilisateurDTO;
 import com.ensta.myfilmlist.form.FilmForm;
 import com.ensta.myfilmlist.form.RealisateurForm;
+import com.ensta.myfilmlist.form.UtilisateurForm;
 import com.ensta.myfilmlist.model.Film;
 import com.ensta.myfilmlist.model.Realisateur;
+import com.ensta.myfilmlist.model.Utilisateur;
 import com.ensta.myfilmlist.service.MyFilmsService;
 import com.ensta.myfilmlist.service.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +22,7 @@ import java.util.*;
 
 import static com.ensta.myfilmlist.mapper.FilmMapper.*;
 import static com.ensta.myfilmlist.mapper.RealisateurMapper.*;
+import static com.ensta.myfilmlist.mapper.UtilisateurMapper.*;
 
 @Service
 public class MyFilmsServiceImpl implements MyFilmsService {
@@ -29,6 +34,9 @@ public class MyFilmsServiceImpl implements MyFilmsService {
 
     @Autowired
     private RealisateurDAO realisateurDAO;
+
+    @Autowired
+    private UtilisateurDAO utilisateurDAO;
 
     /**
      * Calcule la somme des durées d'une liste de films
@@ -108,7 +116,7 @@ public class MyFilmsServiceImpl implements MyFilmsService {
     }
 
     /**
-     * création d'un rélisateur
+     * création d'un réalisateur
      * @param realisateurForm le réalisateur à créer
      * @return le RealisateurDTO correspondant au réalisateur créé avec l'id du RealisateurForm
      * @throws ServiceException
@@ -123,6 +131,22 @@ public class MyFilmsServiceImpl implements MyFilmsService {
             throw new ServiceException(e.getMessage());
         }
     }
+
+    /**
+     * création d'un utilisateur
+     * @param utilisateurForm l'utilisateur à créer
+     * @return l'utilisateurDTO correspondant à l'utilisateur créé avec l'utilisateurForm
+     * @throws ServiceException
+     */
+    @Override
+    public UtilisateurDTO createUtilisateur(UtilisateurForm utilisateurForm) throws ServiceException {
+        try {
+            Utilisateur newUtilisateur = convertUtilisateurFormToUtilisateur(utilisateurForm);
+            newUtilisateur = utilisateurDAO.save(newUtilisateur);
+            return convertUtilisateurToUtilisateurDTO(newUtilisateur);
+        } catch (Exception e) {
+            throw new ServiceException(e.getMessage());
+        }    }
 
 
     /**
@@ -139,6 +163,32 @@ public class MyFilmsServiceImpl implements MyFilmsService {
             throw new ServiceException(e.getMessage()) ;
         }
     }
+
+    /**
+     * Renvoie la liste de tous les utilisateurs
+     * @return la liste des utilisateursDTOs
+     * @throws ServiceException
+     */
+    @Override
+    public List<UtilisateurDTO> findAllUtilisateurs() throws ServiceException{
+        try {
+            List<Utilisateur> liste = utilisateurDAO.findAll();
+            return convertUtilisateurToUtilisateurDTOs(liste);
+        } catch (Exception e) {
+            throw new ServiceException(e.getMessage()) ;
+        }
+    }
+
+    @Override
+    public Optional<UtilisateurDTO> findUtilisateurDTOById(long id) {
+        try {
+            Utilisateur utilisateur = utilisateurDAO.findById(id).get();
+            return Optional.of(convertUtilisateurToUtilisateurDTO(utilisateur));
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
+
 
     @Override
     public RealisateurDTO findRealisateurByNomAndPrenom(String nom, String prenom) throws ServiceException {
@@ -209,6 +259,18 @@ public class MyFilmsServiceImpl implements MyFilmsService {
         }
     }
 
-
+    @Override
+    public void deleteUtilisateur(long id) throws ServiceException {
+        try {
+            Optional<Utilisateur> utilisateurOpt = utilisateurDAO.findById(id);
+            if (utilisateurOpt.isEmpty()) {
+                throw new ServiceException("Suppression d'un utilisateur : utilisateur introuvable pour cet identifiant");
+            }
+            Utilisateur utilisateur = utilisateurOpt.get();
+            utilisateurDAO.delete(utilisateur);
+        } catch (Exception e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
 
 }

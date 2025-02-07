@@ -13,39 +13,36 @@ export default function FilmContainer() {
             .catch((err) => console.error(err));
     }, []);
 
-    /*const handleCreateFilm = (film) => {
+    const handleCreateFilm = (film) => {
         postFilm(film)
             .then(() => getAllFilms())
             .then((response) => setFilms(response.data))
             .catch((err) => console.error(err));
     };
 
-    const handleUpdateFilm = (film) => {
+    /*const handleUpdateFilm = (film) => {
         putFilm(film.id, film)
             .then(() => getAllFilms())
             .then((response) => setFilms(response.data))
             .catch((err) => console.error(err));
-    };
+    };*/
 
     const handleDeleteFilm = (id) => {
         deleteFilm(id)
             .then(() => getAllFilms())
             .then((response) => setFilms(response.data))
             .catch((err) => console.error(err));
-    };*/
+    };
 
     return (
         <div>
+            <CreateFilmForm onSubmit={handleCreateFilm} />
             <FilmList
                 films={films}
                 //onUpdateFilm={handleUpdateFilm}
-                //onDeleteFilm={handleDeleteFilm}
+                onDeleteFilm={handleDeleteFilm}
             />
         </div>
     );
 }
 
-/* avant FilmList
-            <CreateFilmForm onSubmit={handleCreateFilm} />
-
- */

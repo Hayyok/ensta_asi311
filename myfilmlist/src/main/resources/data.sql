@@ -7,3 +7,7 @@ INSERT INTO Film(titre, duree, realisateur_id) VALUES('avatar', 162, 1);
 INSERT INTO Film(titre, duree, realisateur_id) VALUES('La communauté de l''anneau', 178, 2);
 INSERT INTO Film(titre, duree, realisateur_id) VALUES('Les deux tours', 179, 2);
 INSERT INTO Film(titre, duree, realisateur_id) VALUES('Le retour du roi', 201, 2);
+
+CREATE TABLE IF NOT EXISTS Utilisateur(id INT primary key auto_increment, nom VARCHAR(100), prenom VARCHAR(100));
+INSERT INTO Utilisateur(nom, prenom) VALUES('John', 'Doe');
+INSERT INTO Utilisateur(nom, prenom) VALUES('Jane', 'Doe');
