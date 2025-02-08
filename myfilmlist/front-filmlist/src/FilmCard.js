@@ -6,7 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-export default function FilmCard({ film, onEdit, onDelete }) {
+export default function FilmCard({ userId, film, onEdit, onDelete }) {
     const handleClickOnDeleteButton = () => {
         if (onDelete) onDelete(film.id);
     };
@@ -24,12 +24,16 @@ export default function FilmCard({ film, onEdit, onDelete }) {
                 <Typography variant="body1">
                     {film.duree} minutes
                 </Typography>
-                <IconButton onClick={handleClickOnEditButton}>
-                    <EditIcon />
-                </IconButton>
-                <IconButton onClick={handleClickOnDeleteButton}>
-                    <DeleteIcon />
-                </IconButton>
+                {userId === "admin" && (
+                    <>
+                        <IconButton onClick={handleClickOnEditButton}>
+                            <EditIcon />
+                        </IconButton>
+                        <IconButton onClick={handleClickOnDeleteButton}>
+                            <DeleteIcon />
+                        </IconButton>
+                    </>
+                )}
             </CardContent>
         </Card>
     );

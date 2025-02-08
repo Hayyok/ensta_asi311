@@ -5,7 +5,7 @@ import { getAllFilms, postFilm, putFilm, deleteFilm } from "./api/FilmAPI";
 import {Button} from "@mui/material";
 
 
-export default function FilmContainer() {
+export default function FilmContainer({ userId }) {
     const [films, setFilms] = useState([]);
     const [isCreating, setIsCreating] = useState(false);
 
@@ -43,7 +43,7 @@ export default function FilmContainer() {
 
     return (
         <div>
-            {!isCreating ? (
+            {userId === "admin" && !isCreating ? (
                 <Button
                     onClick={() => setIsCreating(true)}
                     variant="contained"
@@ -53,10 +53,11 @@ export default function FilmContainer() {
                     Ajouter un Film
                 </Button>
             ) : (
-                <CreateFilmForm onSubmit={handleCreateFilm} />
+                isCreating && <CreateFilmForm onSubmit={handleCreateFilm} />
             )}
             <FilmList
                 films={films}
+                userId={userId}
                 onUpdateFilm={handleUpdateFilm}
                 onDeleteFilm={handleDeleteFilm}
             />
