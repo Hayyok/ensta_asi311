@@ -16,8 +16,15 @@ export default function App() {
     return (
         <div>
             <Header/>
-            <FilmContainer />
-        </div>
+            {user ? (
+                user.role === "admin" ? (
+                    <AdminPanel />
+                ) : (
+                    <FilmContainer userId={user.userId} />
+                )
+            ) : (
+                <Login onLoginSuccess={handleLoginSuccess} />
+            )}        </div>
     );
 }
 /* juste après le header, je le décommente parce que ça soule de devoir se reconnecter tout le temps
