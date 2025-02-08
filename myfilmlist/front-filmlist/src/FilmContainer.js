@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import FilmList from "./FilmList";
 import CreateFilmForm from "./CreateFilmForm";
 import { getAllFilms, postFilm, putFilm, deleteFilm } from "./api/FilmAPI";
+import {Button} from "@mui/material";
 
 
 export default function FilmContainer() {
     const [films, setFilms] = useState([]);
+    const [isCreating, setIsCreating] = useState(false);
 
     useEffect(() => {
         getAllFilms()
@@ -16,15 +18,20 @@ export default function FilmContainer() {
     const handleCreateFilm = (film) => {
         postFilm(film)
             .then(() => getAllFilms())
-            .then((response) => setFilms(response.data))
+            .then((response) => {
+                setFilms(response.data);
+                setIsCreating(false);
+            })
             .catch((err) => console.error(err));
     };
 
     const handleUpdateFilm = (film) => {
+        console.log("Mise à jour du film :", film);
+        console.log(film.id);
         putFilm(film.id, film)
             .then(() => getAllFilms())
             .then((response) => setFilms(response.data))
-            .catch((err) => console.error(err));
+            .catch((err) => console.error("Erreur lors de la modification :", err));
     };
 
     const handleDeleteFilm = (id) => {
@@ -36,7 +43,18 @@ export default function FilmContainer() {
 
     return (
         <div>
-            <CreateFilmForm onSubmit={handleCreateFilm} />
+            {!isCreating ? (
+                <Button
+                    onClick={() => setIsCreating(true)}
+                    variant="contained"
+                    color="primary"
+                    style={{ marginBottom: "16px" }}
+                >
+                    Ajouter un Film
+                </Button>
+            ) : (
+                <CreateFilmForm onSubmit={handleCreateFilm} />
+            )}
             <FilmList
                 films={films}
                 onUpdateFilm={handleUpdateFilm}

@@ -14,9 +14,18 @@ export default function CreateFilmForm({ film = {}, onSubmit }) {
             .catch((err) => console.error("Erreur lors de la récupération des réalisateurs :", err));
     }, []);
 
+    useEffect(() => {
+        if (film && film.id) {
+            setTitle(film.titre || "");
+            setDuration(film.duree || "");
+            setSelectedRealisateur(film.realisateurId || "");
+        }
+    }, [film]);
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit({ id: film.id, titre, duree, realisateurId: selectedRealisateur });
+        console.log("Film envoyé au back :", { id: film?.id, titre, duree, realisateurId: selectedRealisateur });
+        onSubmit({ id: film?.id, titre, duree, realisateurId: selectedRealisateur || null });
     };
 
     return (
