@@ -1,21 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {Dialog, DialogTitle, DialogContent, DialogActions, Button} from "@mui/material";
 import FilmCard from "./FilmCard";
 import CreateFilmForm from "./CreateFilmForm";
-import {getAllFilms} from "./api/FilmAPI";
 
-export default function FilmList({ onUpdateFilm, onDeleteFilm, onSelectFilm }) {
+export default function FilmList({ userId, films, onUpdateFilm, onDeleteFilm, onSelectFilm }) {
     const [open, setOpen] = useState(false);
-    const [films, setFilms] = useState([]);
     const [selectedFilm, setSelectedFilm] = useState(null);
-
-    useEffect(() => {
-        getAllFilms().then(response => {
-            setFilms(response.data);
-        }).catch(err => {
-            console.log(err);
-        })
-    }, [films]);
 
     const handleEditFilm = (film) => {
         console.log("Film sélectionné pour édition :", film);
@@ -36,7 +26,6 @@ export default function FilmList({ onUpdateFilm, onDeleteFilm, onSelectFilm }) {
 
     const handleDeleteFilm = (id) => {
         onDeleteFilm(id);
-        getAllFilms().then(response => setFilms(response.data)); // Mise à jour après suppression
     };
 
     return (
@@ -48,6 +37,7 @@ export default function FilmList({ onUpdateFilm, onDeleteFilm, onSelectFilm }) {
                     onEdit={handleEditFilm}
                     onDelete={handleDeleteFilm}
                     onSelect={() => onSelectFilm(film)} 
+                    userId={userId}
                 />
             ))}
             <Dialog open={open} onClose={handleClose}>

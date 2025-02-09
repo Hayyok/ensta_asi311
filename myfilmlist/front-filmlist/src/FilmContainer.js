@@ -6,26 +6,25 @@ import { getAllFilms, postFilm, putFilm, deleteFilm } from "./api/FilmAPI";
 import { getAllRealisateurs } from "./api/RealisateurAPI";
 import { Button } from "@mui/material";
 
-export default function FilmContainer() {
+export default function FilmContainer({ userId }) {
     const [films, setFilms] = useState([]);
     const [isCreating, setIsCreating] = useState(false);
     const [selectedFilm, setSelectedFilm] = useState(null);
+    const [realisateurs, setRealisateurs] = useState([]);
 
+    // Charger les films
     useEffect(() => {
         getAllFilms()
             .then((response) => setFilms(response.data))
             .catch((err) => console.error(err));
     }, []);
 
-    const [realisateurs, setRealisateurs] = useState([]);
-
-    useEffect(() => {
     // Charger les réalisateurs
+    useEffect(() => {
         getAllRealisateurs()
             .then((response) => setRealisateurs(response.data))
             .catch((err) => console.error("Erreur lors de la récupération des réalisateurs :", err));
     }, []);
-
 
     const handleCreateFilm = (film) => {
         postFilm(film)
@@ -61,32 +60,39 @@ export default function FilmContainer() {
 
     return (
         <div>
+            {/* Bouton pour ajouter un film (réservé à l'admin) */}
+            {userId === "admin" && !isCreating && (
+                <Button
+                    onClick={() => setIsCreating(true)}
+                    variant="contained"
+                    color="primary"
+                    style={{ marginBottom: "16px" }}
+                >
+                    Ajouter un Film
+                </Button>
+            )}
+
+            {/* Formulaire de création de film */}
+            {isCreating && (
+                <CreateFilmForm onSubmit={handleCreateFilm} />
+            )}
+
+            {/* Détails du film sélectionné */}
             {selectedFilm ? (
                 <FilmDetails 
-                film={selectedFilm}
-                realisateurs={realisateurs} 
-                onClose={handleCloseDetails} />
+                    film={selectedFilm}
+                    realisateurs={realisateurs} 
+                    onClose={handleCloseDetails}
+                />
             ) : (
-                <>
-                    {!isCreating ? (
-                        <Button
-                            onClick={() => setIsCreating(true)}
-                            variant="contained"
-                            color="primary"
-                            style={{ marginBottom: "16px" }}
-                        >
-                            Ajouter un Film
-                        </Button>
-                    ) : (
-                        <CreateFilmForm onSubmit={handleCreateFilm} />
-                    )}
-                    <FilmList
-                        films={films}
-                        onUpdateFilm={handleUpdateFilm}
-                        onDeleteFilm={handleDeleteFilm}
-                        onSelectFilm={handleSelectFilm}
-                    />
-                </>
+                // Liste des films
+                <FilmList
+                    films={films}
+                    userId={userId}
+                    onUpdateFilm={handleUpdateFilm}
+                    onDeleteFilm={handleDeleteFilm}
+                    onSelectFilm={handleSelectFilm}
+                />
             )}
         </div>
     );

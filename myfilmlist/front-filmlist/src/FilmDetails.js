@@ -5,7 +5,10 @@ import Typography from "@mui/material/Typography";
 
 export default function FilmDetails({ film, realisateurs, onClose }) {
     if (!film) return null;
-    const realisateur = realisateurs.find((r) => r.id === film.realisateurId);
+    const realisateur = realisateurs.find((r) => r.id === film.realisateurDTOId);
+    console.log("Film :", film);
+    console.log("Realisateurs :", realisateurs);
+
     return (
         <Card variant="outlined" sx={{ padding: 2, marginTop: 2 }}>
             <CardContent>

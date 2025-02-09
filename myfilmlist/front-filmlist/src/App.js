@@ -18,23 +18,16 @@ export default function App() {
             <Header/>
             {user ? (
                 user.role === "admin" ? (
-                    <AdminPanel />
+                    <>
+                        <AdminPanel />
+                        <FilmContainer userId={user.role} />
+                    </>
                 ) : (
-                    <FilmContainer userId={user.userId} />
-                )
-            ) : (
-                <Login onLoginSuccess={handleLoginSuccess} />
-            )}        </div>
-    );
-}
-/* juste après le header, je le décommente parce que ça soule de devoir se reconnecter tout le temps
-            {user ? (
-                user.role === "admin" ? (
-                    <AdminPanel role={user.role} />
-                ) : (
-                    <FilmContainer userId={user.userId} />
+                    <FilmContainer userId={user.role} />
                 )
             ) : (
                 <Login onLoginSuccess={handleLoginSuccess} />
             )}
- */
+        </div>
+    );
+}

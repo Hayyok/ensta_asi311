@@ -7,7 +7,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 
-export default function FilmCard({ film, onEdit, onDelete, onSelect }) {
+export default function FilmCard({ film, userId, onEdit, onDelete, onSelect }) {
     const handleClickOnDeleteButton = (e) => {
         e.stopPropagation(); // Empêche le clic global sur la carte
         if (onDelete) onDelete(film.id);
@@ -32,15 +32,16 @@ export default function FilmCard({ film, onEdit, onDelete, onSelect }) {
                 <Typography variant="h5" gutterBottom>
                     {film.titre}
                 </Typography>
-                <Typography variant="body1">
-                    {film.duree} minutes
-                </Typography>
-                <IconButton onClick={handleClickOnEditButton}>
-                    <EditIcon />
-                </IconButton>
-                <IconButton onClick={handleClickOnDeleteButton}>
-                    <DeleteIcon />
-                </IconButton>
+                {userId === "admin" && (
+                    <>
+                        <IconButton onClick={handleClickOnEditButton}>
+                            <EditIcon />
+                        </IconButton>
+                        <IconButton onClick={handleClickOnDeleteButton}>
+                            <DeleteIcon />
+                        </IconButton>
+                    </>
+                )}
             </CardContent>
         </Card>
     );
