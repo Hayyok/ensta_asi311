@@ -4,12 +4,12 @@ import FilmContainer from "./FilmContainer";
 import AdminPanel from "./AdminPanel";
 import Header from "./Header";
 import { getFilmsFavorisWithUserId } from "./api/UserAPI";
-
+import FilmsFavorisContainer from "./FilmsFavorisContainer"
+import { Button } from "@mui/material";
 
 export default function App() {
     const [user, setUser] = useState(null);
-    const [filmsFavoris, setFilmsFavoris] = useState([]);
-    const [showFavoris, setShowFavoris] = useState(false);
+    const [showFavoris, setShowFavoris] = useState(false); // État pour afficher ou masquer les favoris
 
     const handleLoginSuccess = (userData) => {
         console.log("handleLoginSuccess appelé avec :", userData);
@@ -18,22 +18,8 @@ export default function App() {
     };
 
     const handleShowFavoris = () => {
-        if (showFavoris) {
-            // Si la liste est déjà affichée, on la cache
-            setShowFavoris(false);
-        } else {
-            // Sinon, on récupère les films favoris et on les affiche
-            if (user) {
-                getFilmsFavorisWithUserId(user.id)
-                    .then((response) => {
-                        setFilmsFavoris(response.data);
-                        setShowFavoris(true);
-                    })
-                    .catch((err) => console.error("Erreur lors de la récupération des films favoris :", err));
-            }
-        }
+        setShowFavoris(!showFavoris);
     };
-
 
     return (
         <div style={{ fontFamily: 'Poppins, sans-serif'}}>
@@ -41,9 +27,11 @@ export default function App() {
 
             {user ? (
                 <>
-                    {/* Bouton pour afficher les films favoris (uniquement pour les utilisateurs non-admins) */}
+                    {/* Bouton pour afficher/masquer les favoris */}
                     {user.role !== "admin" && (
-                        <button
+                        <Button
+                            variant="contained"
+                            color="primary"
                             onClick={handleShowFavoris}
                             style={{
                                 backgroundColor: "#bdcf47",
@@ -56,23 +44,14 @@ export default function App() {
                                 display: "block",
                             }}
                         >
-                            Mes Films Favoris
-                        </button>
+                            {showFavoris ? "Masquer les favoris" : "Afficher les favoris"}
+                        </Button>
                     )}
 
-                    {/* Affichage des films favoris */}
-                    {showFavoris && (
-                        <div>
-                            <h2>Mes Films Favoris</h2>
-                            <ul>
-                                {filmsFavoris.map((film) => (
-                                    <li key={film.id}>{film.titre}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
+                    {/* Affichage des favoris si activé */}
+                    {showFavoris && user.role !== "admin" && <FilmsFavorisContainer userId={user.id} />}
 
-                    {/* Affichage des films (gestion admin / utilisateur classique) */}
+                    {/* Affichage des films et gestion admin / utilisateur */}
                     {user.role === "admin" ? (
                         <>
                             <AdminPanel/>

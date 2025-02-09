@@ -96,12 +96,12 @@ export default function FilmDetails({ film, realisateurs, onClose, onRate }) {
                 </CardContent>
             </Card>
             {/* Boutons */}
-            <DialogActions>
-                <Button variant="contained" style={{
+            <DialogActions sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <Button variant="contained" color="primary" style={{
                     backgroundColor: "#bdcf47",
                     fontFamily: 'Poppins, sans-serif',
                     color: "#484e23",
-                }} sx={{ mt: 2 , mr: 1}} onClick={() => setOpen(true)}>
+                }} onClick={() => setOpen(true)}>
                     Noter
                 </Button>
 
@@ -155,5 +155,5 @@ export default function FilmDetails({ film, realisateurs, onClose, onRate }) {
                 </Button>
             </DialogActions>
         </Dialog>
-    );
+    )
 }

@@ -4,7 +4,7 @@ import CreateFilmForm from "./CreateFilmForm";
 import FilmDetails from "./FilmDetails";
 import { getAllFilms, postFilm, putFilm, deleteFilm } from "./api/FilmAPI";
 import { getAllRealisateurs } from "./api/RealisateurAPI";
-import {Button, Divider, Grid} from "@mui/material";
+import {Button, Divider, Grid, TextField} from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -15,6 +15,7 @@ export default function FilmContainer({ userId, userRole }) {
     const [isCreating, setIsCreating] = useState(false);
     const [selectedFilm, setSelectedFilm] = useState(null);
     const [realisateurs, setRealisateurs] = useState([]);
+    const [searchTerm, setSearchTerm] = useState(""); // État pour le terme de recherche
 
     // Charger les films
     useEffect(() => {
@@ -62,8 +63,29 @@ export default function FilmContainer({ userId, userRole }) {
         setSelectedFilm(null);
     };
 
+    // Fonction pour gérer le changement dans la barre de recherche
+    const handleSearchChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
+    // Filtrer les films en fonction du terme de recherche
+    const filteredFilms = films.filter((film) =>
+        film.titre.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return (
         <Grid container spacing={3} padding={3}>
+            {/* Section de recherche */}
+            <Grid item xs={12}>
+                <TextField
+                    label="Rechercher un film"
+                    variant="outlined"
+                    fullWidth
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                    style={{ marginBottom: "20px" }}
+                />
+            </Grid>
             {/* Section de gestion des films */}
             <Grid item xs={12} md={8}>
                 <Card>
@@ -96,7 +118,7 @@ export default function FilmContainer({ userId, userRole }) {
                             />
                         ) : (
                             <FilmList
-                                films={films}
+                                films={filteredFilms}
                                 userId={userId}
                                 userRole={userRole}
                                 onUpdateFilm={handleUpdateFilm}
