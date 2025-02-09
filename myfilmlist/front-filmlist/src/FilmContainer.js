@@ -6,7 +6,7 @@ import { getAllFilms, postFilm, putFilm, deleteFilm } from "./api/FilmAPI";
 import { getAllRealisateurs } from "./api/RealisateurAPI";
 import { Button } from "@mui/material";
 
-export default function FilmContainer({ userId }) {
+export default function FilmContainer({ userRole }) {
     const [films, setFilms] = useState([]);
     const [isCreating, setIsCreating] = useState(false);
     const [selectedFilm, setSelectedFilm] = useState(null);
@@ -61,7 +61,7 @@ export default function FilmContainer({ userId }) {
     return (
         <div>
             {/* Bouton pour ajouter un film (réservé à l'admin) */}
-            {userId === "admin" && !isCreating && (
+            {userRole === "admin" && !isCreating && (
                 <Button
                     onClick={() => setIsCreating(true)}
                     variant="contained"
@@ -70,6 +70,7 @@ export default function FilmContainer({ userId }) {
                 >
                     Ajouter un Film
                 </Button>
+
             )}
 
             {/* Formulaire de création de film */}
@@ -88,7 +89,7 @@ export default function FilmContainer({ userId }) {
                 // Liste des films
                 <FilmList
                     films={films}
-                    userId={userId}
+                    userRole={userRole}
                     onUpdateFilm={handleUpdateFilm}
                     onDeleteFilm={handleDeleteFilm}
                     onSelectFilm={handleSelectFilm}
