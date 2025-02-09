@@ -4,7 +4,11 @@ import CreateFilmForm from "./CreateFilmForm";
 import FilmDetails from "./FilmDetails";
 import { getAllFilms, postFilm, putFilm, deleteFilm } from "./api/FilmAPI";
 import { getAllRealisateurs } from "./api/RealisateurAPI";
-import { Button } from "@mui/material";
+import {Button, Divider, Grid} from "@mui/material";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import CommentaireContainer from "./CommentaireContainer";
 
 export default function FilmContainer({ userId, userRole }) {
     const [films, setFilms] = useState([]);
