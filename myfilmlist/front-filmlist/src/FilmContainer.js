@@ -7,20 +7,24 @@ import { getAllFilms, postFilm, putFilm, deleteFilm } from "./api/FilmAPI";
 import { getAllRealisateurs } from "./api/RealisateurAPI";
 import { Button, Grid, Card, CardContent, Typography, Divider } from "@mui/material";
 
-export default function FilmContainer({ userId }) {
+export default function FilmContainer({ userRole }) {
     const [films, setFilms] = useState([]);
     const [isCreating, setIsCreating] = useState(false);
     const [selectedFilm, setSelectedFilm] = useState(null);
     const [realisateurs, setRealisateurs] = useState([]);
 
+    // Charger les films
     useEffect(() => {
         getAllFilms()
             .then((response) => setFilms(response.data))
             .catch((err) => console.error(err));
+    }, []);
 
+    // Charger les réalisateurs
+    useEffect(() => {
         getAllRealisateurs()
             .then((response) => setRealisateurs(response.data))
-            .catch((err) => console.error(err));
+            .catch((err) => console.error("Erreur lors de la récupération des réalisateurs :", err));
     }, []);
 
     const handleCreateFilm = (film) => {
@@ -64,7 +68,7 @@ export default function FilmContainer({ userId }) {
                         <Typography variant="h5" gutterBottom>
                             Liste des Films
                         </Typography>
-                        {userId === "admin" && !isCreating ? (
+                        {userRole === "admin" && !isCreating ? (
                             <Button
                                 onClick={() => setIsCreating(true)}
                                 variant="contained"
@@ -85,7 +89,7 @@ export default function FilmContainer({ userId }) {
                         ) : (
                             <FilmList
                                 films={films}
-                                userId={userId}
+                                userRole={userRole}
                                 onUpdateFilm={handleUpdateFilm}
                                 onDeleteFilm={handleDeleteFilm}
                                 onSelectFilm={handleSelectFilm}
