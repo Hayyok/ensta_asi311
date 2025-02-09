@@ -85,6 +85,27 @@ public class MyFilmsServiceImpl implements MyFilmsService {
         }
     }
 
+    @Override
+    public List<FilmDTO> findFilmsFavorisByUtilisateurId(long id) throws ServiceException {
+        try{
+            List<Film> filmsFavoris = utilisateurDAO.findFilmsFavorisByUtilisateurId(id);
+            return convertFilmToFilmDTOs(filmsFavoris);
+        } catch (Exception e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
+
+    @Override
+    public FilmDTO addFilmFavorisForUtilisateurIdByFilmId(long utilisateurId, long filmId) throws ServiceException {
+        try{
+            utilisateurDAO.addFilmFavorisForUtilisateurIdByFilmId(utilisateurId, filmId);
+            FilmDTO filmFavoris = findFilmById(filmId);
+            return filmFavoris;
+        } catch (Exception e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
+
     /**
      * création d'un film si il est bien rattaché à un réalisateur existant
      * @param filmForm le film à créer

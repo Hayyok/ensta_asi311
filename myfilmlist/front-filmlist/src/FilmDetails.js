@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography, Box, Card, CardMedia, CardContent } from "@mui/material";
+import pessauxPlaceholder from "./assets/francois.jpg"
 import { Star } from "lucide-react";
 import Rating from "@mui/material/Rating";
-import Box from "@mui/material/Box";
 import StarIcon from "@mui/icons-material/Star";
-import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 
 
@@ -17,7 +14,6 @@ export default function FilmDetails({ film, realisateurs, onClose, onRate }) {
     const realisateur = realisateurs.find((r) => r.id === film.realisateurDTOId);
     console.log("Film :", film);
     console.log("Realisateurs :", realisateurs);
-
 
 
     const renderStars = (note) => {
@@ -61,31 +57,46 @@ export default function FilmDetails({ film, realisateurs, onClose, onRate }) {
     };
 
     return (
-        <Card variant="outlined" sx={{ padding: 2, marginTop: 2 }}>
-            <CardContent>
-                <Typography variant="h4" gutterBottom>
-                    {film.titre}
-                </Typography>
+        <Dialog open={!!film} onClose={onClose} maxWidth="sm" fullWidth>
+            <Card>
+                {/* Section Image */}
+                <CardMedia
+                    component="img"
+                    alt={film.titre}
+                    height="200"
+                    image={pessauxPlaceholder} // Remplacez avec une URL dynamique si possible
+                />
+                <CardContent>
 
-                <div className="flex items-center gap-2">
-                    <Rating
-                        name="text-feedback"
-                        value={film.note}
-                        readOnly
-                        precision={0.5}
-                        emptyIcon={<StarIcon style={{opacity: 0.2}} fontSize="inherit"/>}
-                    />
-                </div>
+                    {/* Titre du Film */}
+                    <Typography variant="h4" gutterBottom align="center" fontWeight="bold">
+                        {film.titre}
+                    </Typography>
 
-
-                <Typography variant="body1" gutterBottom>
-                    Durée : {film.duree} minutes
-                </Typography>
-                <Typography variant="body1">
-                    Réalisateur : {realisateur ? `${realisateur.prenom} ${realisateur.nom}` : "Inconnu"}
-                </Typography>
-
-
+                    {/*Note*/}
+                    <div className="flex items-center gap-2">
+                        <Rating
+                            name="text-feedback"
+                            value={film.note}
+                            readOnly
+                            precision={0.5}
+                            emptyIcon={<StarIcon style={{opacity: 0.2}} fontSize="inherit"/>}
+                        />
+                    </div>
+                    {/* Informations */}
+                    <Box sx={{marginY: 2}}>
+                        <Typography variant="body1" sx={{marginBottom: 1}}>
+                            <strong>Durée :</strong> {film.duree} minutes
+                        </Typography>
+                        <Typography variant="body1">
+                            <strong>Réalisateur
+                                :</strong> {realisateur ? `${realisateur.prenom} ${realisateur.nom}` : "Inconnu"}
+                        </Typography>
+                    </Box>
+                </CardContent>
+            </Card>
+            {/* Boutons */}
+            <DialogActions>
                 <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={() => setOpen(true)}>
                     Noter
                 </Button>
@@ -109,21 +120,13 @@ export default function FilmDetails({ film, realisateurs, onClose, onRate }) {
                     </Box>
                 </Modal>
 
-                <button
-                    onClick={onClose}
-                    style={{
-                        marginTop: "20px",
-                        backgroundColor: "red",
-                        color: "white",
-                        padding: "10px",
-                        border: "none",
-                        borderRadius: "5px",
-                        cursor: "pointer",
-                    }}
-                >
+                <Button onClick={onClose} variant="outlined" color="primary">
                     Fermer
-                </button>
-            </CardContent>
-        </Card>
+                </Button>
+                <Button onClick={() => alert("Modifier film")} variant="contained" color="secondary">
+                    Modifier
+                </Button>
+            </DialogActions>
+        </Dialog>
     );
 }

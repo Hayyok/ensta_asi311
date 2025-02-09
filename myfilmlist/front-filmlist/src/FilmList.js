@@ -3,7 +3,7 @@ import {Dialog, DialogTitle, DialogContent, DialogActions, Button} from "@mui/ma
 import FilmCard from "./FilmCard";
 import CreateFilmForm from "./CreateFilmForm";
 
-export default function FilmList({ userId, films, onUpdateFilm, onDeleteFilm, onSelectFilm }) {
+export default function FilmList({ userId, userRole, films, onUpdateFilm, onDeleteFilm, onSelectFilm }) {
     const [open, setOpen] = useState(false);
     const [selectedFilm, setSelectedFilm] = useState(null);
 
@@ -37,6 +37,7 @@ export default function FilmList({ userId, films, onUpdateFilm, onDeleteFilm, on
                     onEdit={handleEditFilm}
                     onDelete={handleDeleteFilm}
                     onSelect={() => onSelectFilm(film)} 
+                    userRole={userRole}
                     userId={userId}
                 />
             ))}

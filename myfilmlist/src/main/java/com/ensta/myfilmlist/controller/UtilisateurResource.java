@@ -31,11 +31,17 @@ public interface UtilisateurResource {
     })
     ResponseEntity<UtilisateurDTO> getUtilisateurById(long id) throws ControllerException;
 
-    //@ApiOperation(value = "Donner la liste des films favoris d'un utilisateur", notes = "Permet de renvoyer la liste des films favoris d'un utilisateur", produces = MediaType.APPLICATION_JSON_VALUE)
-    //@ApiResponses(value = {
-    //        @ApiResponse(code = 200, message = "La liste des films favoris de l'utilisateur a été renvoyée correctement")
-    //})
-    //ResponseEntity<List<FilmDTO>> getFilmsFavorisByUtilisateurId(long utilisateurId) throws ControllerException;
+    @ApiOperation(value = "Donner la liste des films favoris d'un utilisateur", notes = "Permet de renvoyer la liste des films favoris d'un utilisateur", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La liste des films favoris de l'utilisateur a été renvoyée correctement")
+    })
+    ResponseEntity<List<FilmDTO>> getFilmsFavorisByUtilisateurId(long id) throws ControllerException;
+
+    @ApiOperation(value = "Ajout d'un film dans la liste des films favoris d'un utilisateur", notes = "Permet d'ajouter un film grâce à son identifiant dans la liste des films favoris d'un utilisateur par son identifiant", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Le film a été ajouté correctement à la liste des films favoris de l'utilisateur")
+    })
+    ResponseEntity<FilmDTO> addFilmFavorisForUtilisateurIdByFilmId(long utilisateurId, long filmId) throws ControllerException;
 
     @ApiOperation(value = "Création d'un utilisateur", notes = "Permet de créer un utilisateur avec les paramètres donnés", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiResponses(value = {

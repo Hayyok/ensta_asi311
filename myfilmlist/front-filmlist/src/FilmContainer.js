@@ -4,9 +4,13 @@ import CreateFilmForm from "./CreateFilmForm";
 import FilmDetails from "./FilmDetails";
 import { getAllFilms, postFilm, putFilm, deleteFilm } from "./api/FilmAPI";
 import { getAllRealisateurs } from "./api/RealisateurAPI";
-import { Button } from "@mui/material";
+import {Button, Divider, Grid} from "@mui/material";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import CommentaireContainer from "./CommentaireContainer";
 
-export default function FilmContainer({ userId }) {
+export default function FilmContainer({ userId, userRole }) {
     const [films, setFilms] = useState([]);
     const [isCreating, setIsCreating] = useState(false);
     const [selectedFilm, setSelectedFilm] = useState(null);
@@ -59,41 +63,58 @@ export default function FilmContainer({ userId }) {
     };
 
     return (
-        <div>
-            {/* Bouton pour ajouter un film (réservé à l'admin) */}
-            {userId === "admin" && !isCreating && (
-                <Button
-                    onClick={() => setIsCreating(true)}
-                    variant="contained"
-                    color="primary"
-                    style={{ marginBottom: "16px" }}
-                >
-                    Ajouter un Film
-                </Button>
-            )}
+        <Grid container spacing={3} padding={3}>
+            {/* Section de gestion des films */}
+            <Grid item xs={12} md={8}>
+                <Card>
+                    <CardContent>
+                        <Typography variant="h5" gutterBottom>
+                            Liste des Films
+                        </Typography>
+                        {userRole === "admin" && !isCreating ? (
+                            <Button
+                                onClick={() => setIsCreating(true)}
+                                variant="contained"
+                                color="primary"
+                                style={{ marginBottom: "16px" }}
+                            >
+                                Ajouter un Film
+                            </Button>
+                        ) : (
+                            isCreating && <CreateFilmForm onSubmit={handleCreateFilm} />
+                        )}
+                        {selectedFilm ? (
+                            <FilmDetails
+                                film={selectedFilm}
+                                realisateurs={realisateurs}
+                                onClose={handleCloseDetails}
+                            />
+                        ) : (
+                            <FilmList
+                                films={films}
+                                userId={userId}
+                                userRole={userRole}
+                                onUpdateFilm={handleUpdateFilm}
+                                onDeleteFilm={handleDeleteFilm}
+                                onSelectFilm={handleSelectFilm}
+                            />
+                        )}
+                    </CardContent>
+                </Card>
+            </Grid>
 
-            {/* Formulaire de création de film */}
-            {isCreating && (
-                <CreateFilmForm onSubmit={handleCreateFilm} />
-            )}
-
-            {/* Détails du film sélectionné */}
-            {selectedFilm ? (
-                <FilmDetails 
-                    film={selectedFilm}
-                    realisateurs={realisateurs} 
-                    onClose={handleCloseDetails}
-                />
-            ) : (
-                // Liste des films
-                <FilmList
-                    films={films}
-                    userId={userId}
-                    onUpdateFilm={handleUpdateFilm}
-                    onDeleteFilm={handleDeleteFilm}
-                    onSelectFilm={handleSelectFilm}
-                />
-            )}
-        </div>
+            {/* Section de suggestions */}
+            <Grid item xs={12} md={4}>
+                <Card>
+                    <CardContent>
+                        <Typography variant="h5" gutterBottom>
+                            Suggestions pour les Admins
+                        </Typography>
+                        <Divider sx={{ marginY: 2 }} />
+                        <CommentaireContainer />
+                    </CardContent>
+                </Card>
+            </Grid>
+        </Grid>
     );
 }

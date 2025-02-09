@@ -15,4 +15,8 @@ public interface UtilisateurDAO {
     void delete(Utilisateur utilisateur);
 
     Optional<Utilisateur> findById(long id);
+
+    List<Film> findFilmsFavorisByUtilisateurId(long id);
+
+    void addFilmFavorisForUtilisateurIdByFilmId(long utilisateurId, long filmId);
 }

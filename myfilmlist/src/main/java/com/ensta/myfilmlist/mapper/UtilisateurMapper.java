@@ -22,11 +22,12 @@ public class UtilisateurMapper {
     public static UtilisateurDTO convertUtilisateurToUtilisateurDTO(Utilisateur utilisateur) {
         UtilisateurDTO utilisateurDTO = new UtilisateurDTO();
         utilisateurDTO.setId(utilisateur.getId());
-        utilisateurDTO.setNom(utilisateur.getNom());
-        utilisateurDTO.setPrenom(utilisateur.getPrenom());
-        if(utilisateur.getFilmsFavoris()!=null) {
-            utilisateurDTO.setFilmsFavoris(convertFilmToFilmDTOs(utilisateur.getFilmsFavoris()));
-        } else { utilisateurDTO.setFilmsFavoris(null); }
+        utilisateurDTO.setUsername(utilisateur.getUsername());
+        utilisateurDTO.setPassword(utilisateur.getPassword());
+        utilisateurDTO.setRole(utilisateur.getRole());
+        if(utilisateur.getFilmsFavorisId()!=null) {
+            utilisateurDTO.setFilmsFavorisId(utilisateur.getFilmsFavorisId());
+        } else { utilisateurDTO.setFilmsFavorisId(null); }
         return utilisateurDTO;
     }
 
@@ -49,18 +50,19 @@ public class UtilisateurMapper {
     public static Utilisateur convertUtilisateurDTOToUtilisateur(UtilisateurDTO utilisateurDTO) {
         Utilisateur utilisateur = new Utilisateur();
         utilisateur.setId(utilisateurDTO.getId());
-        utilisateur.setNom(utilisateurDTO.getNom());
-        utilisateur.setPrenom(utilisateurDTO.getPrenom());
-        if(utilisateurDTO.getFilmsFavoris()!=null) {
-            utilisateur.setFilmsFavoris(convertFilmDTOToFilms(utilisateurDTO.getFilmsFavoris()));
-        } else { utilisateur.setFilmsFavoris(null); }
+        utilisateur.setUsername(utilisateurDTO.getUsername());
+        utilisateur.setPassword(utilisateurDTO.getPassword());
+        utilisateur.setRole(utilisateurDTO.getRole());
+        if(utilisateurDTO.getFilmsFavorisId()!=null) {
+            utilisateur.setFilmsFavorisId(utilisateurDTO.getFilmsFavorisId());
+        } else { utilisateur.setFilmsFavorisId(null); }
         return utilisateur;
     }
 
     public static Utilisateur convertUtilisateurFormToUtilisateur(UtilisateurForm utilisateurForm){
         Utilisateur utilisateur = new Utilisateur();
-        utilisateur.setNom(utilisateurForm.getNom());
-        utilisateur.setPrenom(utilisateurForm.getPrenom());
+        utilisateur.setUsername(utilisateurForm.getUsername());
+        utilisateur.setPassword(utilisateurForm.getPassword());
         return utilisateur;
     }
 

@@ -105,4 +105,8 @@ public interface MyFilmsService {
     void deleteUtilisateur(long id) throws ServiceException;
 
     FilmDTO editFilm(long id, FilmForm filmForm) throws ServiceException;
+
+    List<FilmDTO> findFilmsFavorisByUtilisateurId(long id) throws ServiceException;
+
+    FilmDTO addFilmFavorisForUtilisateurIdByFilmId(long utilisateurId, long filmId) throws ServiceException;
 }
