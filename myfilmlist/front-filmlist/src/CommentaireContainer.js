@@ -38,9 +38,8 @@ export default function CommentaireContainer() {
     };
 
     return (
-        <Box>
+        <Box >
             <Typography variant="h5" gutterBottom>
-                Suggestions pour les admins
             </Typography>
             {/* Liste des commentaires */}
             <List>
@@ -72,6 +71,16 @@ export default function CommentaireContainer() {
                     color="primary"
                     sx={{ marginTop: 1 }}
                     onClick={handleAddCommentaire}
+                    style={{
+                        backgroundColor: "#bdcf47",
+                        fontFamily: 'Poppins, sans-serif',
+                        margin: "10px auto",
+                        padding: "8px 12px",
+                        color: "#484e23",
+                        borderRadius: "5px",
+                        cursor: "pointer",
+                        display: "block",
+                    }}
                 >
                     Envoyer
                 </Button>

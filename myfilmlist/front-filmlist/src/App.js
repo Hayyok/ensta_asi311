@@ -36,8 +36,8 @@ export default function App() {
 
 
     return (
-        <div>
-            <Header />
+        <div style={{ fontFamily: 'Poppins, sans-serif'}}>
+            <Header/>
 
             {user ? (
                 <>
@@ -46,10 +46,11 @@ export default function App() {
                         <button
                             onClick={handleShowFavoris}
                             style={{
+                                backgroundColor: "#bdcf47",
+                                fontFamily: 'Poppins, sans-serif',
                                 margin: "10px auto",
                                 padding: "8px 12px",
-                                backgroundColor: "blue",
-                                color: "white",
+                                color: "#484e23",
                                 borderRadius: "5px",
                                 cursor: "pointer",
                                 display: "block",
@@ -74,15 +75,15 @@ export default function App() {
                     {/* Affichage des films (gestion admin / utilisateur classique) */}
                     {user.role === "admin" ? (
                         <>
-                            <AdminPanel />
-                            <FilmContainer userId={user.id} userRole={user.role} />
+                            <AdminPanel/>
+                            <FilmContainer userId={user.id} userRole={user.role}/>
                         </>
                     ) : (
-                        <FilmContainer userId={user.id} userRole={user.role} />
+                        <FilmContainer userId={user.id} userRole={user.role}/>
                     )}
                 </>
             ) : (
-                <Login onLoginSuccess={handleLoginSuccess} />
+                <Login onLoginSuccess={handleLoginSuccess}/>
             )}
         </div>
     );

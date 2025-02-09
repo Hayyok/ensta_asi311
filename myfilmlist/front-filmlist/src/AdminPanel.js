@@ -70,7 +70,21 @@ export default function AdminPanel() {
                 {realisateurs.map((realisateur) => (
                     <li key={realisateur.id}>
                         {`${realisateur.prenom || "Inconnu"} ${realisateur.nom || "Inconnu"} - ${realisateur.dateNaissance || "Date inconnue"}`}
-                        <button onClick={() => handleDeleteRealisateur(realisateur.id)}>Supprimer</button>
+                        <button
+                            onClick={() => handleDeleteRealisateur(realisateur.id)}
+                            style={{
+                                backgroundColor: "#bdcf47",
+                                fontFamily: 'Poppins, sans-serif',
+                                margin: "10px auto",
+                                padding: "8px 12px",
+                                color: "#484e23",
+                                borderRadius: "5px",
+                                cursor: "pointer",
+                                display: "block",
+                            }}
+                        >
+                            Supprimer
+                        </button>
                     </li>
                 ))}
             </ul>
@@ -92,7 +106,21 @@ export default function AdminPanel() {
                 value={newRealisateur.dateNaissance}
                 onChange={(e) => setNewRealisateur({...newRealisateur, dateNaissance: e.target.value})}
             />
-            <button onClick={handleAddRealisateur}>Ajouter</button>
+            <button
+                onClick={handleAddRealisateur}
+                style={{
+                    backgroundColor: "#bdcf47",
+                    fontFamily: 'Poppins, sans-serif',
+                    margin: "10px auto",
+                    padding: "8px 12px",
+                    color: "#484e23",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                    display: "block",
+                }}
+            >
+                Ajouter
+            </button>
         </div>
     );
 }

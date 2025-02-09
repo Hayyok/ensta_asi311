@@ -66,7 +66,7 @@ export default function Login({ onLoginSuccess }) {
     };
 
     return (
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "50px" }}>
+        <div style={{ fontFamily: 'Poppins' , display: "flex", flexDirection: "column", alignItems: "center", marginTop: "50px",  }}>
             <img src={turtleImage} alt="Tortue" style={{ width: "200px", marginBottom: "20px" }} />
             {showCreateAccount ? (
                 <CreateUtilisateurForm onAccountCreated={handleAccountCreated} />
@@ -88,15 +88,34 @@ export default function Login({ onLoginSuccess }) {
                             fullWidth
                             margin="normal"
                         />
-                        <Button type="submit" variant="contained" color="primary" style={{ marginTop: "20px" }}>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            style={{
+                                backgroundColor: "#bdcf47",
+                                fontFamily: 'Poppins, sans-serif',
+                                margin: "10px auto",
+                                color: "#484e23",
+                                cursor: "pointer",
+                            }}
+                        >
                             Connexion
                         </Button>
                         {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
                     </form>
                     <Button
-                        variant="outlined"
                         color="secondary"
-                        style={{ marginTop: "20px" }}
+                        style={{
+                            backgroundColor: "#bdcf47",
+                            fontFamily: 'Poppins, sans-serif',
+                            margin: "10px auto",
+                            padding: "8px 12px",
+                            color: "#484e23",
+                            borderRadius: "5px",
+                            cursor: "pointer",
+                            display: "block",
+                        }}
                         onClick={handleCreateAccountClick}
                     >
                         Créer un compte

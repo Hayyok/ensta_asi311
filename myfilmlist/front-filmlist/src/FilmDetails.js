@@ -97,7 +97,7 @@ export default function FilmDetails({ film, realisateurs, onClose, onRate }) {
             </Card>
             {/* Boutons */}
             <DialogActions>
-                <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={() => setOpen(true)}>
+                <Button variant="contained" color="primary" sx={{ mt: 2 , mr: 1}} onClick={() => setOpen(true)}>
                     Noter
                 </Button>
 

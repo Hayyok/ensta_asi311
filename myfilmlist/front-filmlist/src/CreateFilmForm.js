@@ -57,7 +57,16 @@ export default function CreateFilmForm({ film = {}, onSubmit }) {
                     ))}
                 </Select>
             </FormControl>
-            <Button type="submit" variant="contained" color="primary">
+            <Button type="submit" variant="contained" color="primary" style={{
+                backgroundColor: "#bdcf47",
+                fontFamily: 'Poppins, sans-serif',
+                margin: "10px auto",
+                padding: "8px 12px",
+                color: "#484e23",
+                borderRadius: "5px",
+                cursor: "pointer",
+                display: "block",
+            }}>
                 {film.id ? "Modifier" : "Créer"}
             </Button>
         </form>

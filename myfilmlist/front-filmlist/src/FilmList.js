@@ -29,7 +29,16 @@ export default function FilmList({ userId, userRole, films, onUpdateFilm, onDele
     };
 
     return (
-        <div>
+        <div style={{
+            backgroundColor: "#bdcf47",
+            fontFamily: 'Poppins, sans-serif',
+            margin: "10px auto",
+            padding: "8px 12px",
+            color: "#484e23",
+            borderRadius: "5px",
+            cursor: "pointer",
+            display: "block",
+        }}>
             {films.map((film) => (
                 <FilmCard
                     key={film.id}
@@ -39,9 +48,20 @@ export default function FilmList({ userId, userRole, films, onUpdateFilm, onDele
                     onSelect={() => onSelectFilm(film)} 
                     userRole={userRole}
                     userId={userId}
+                    style={{
+                        backgroundColor: "#bdcf47",
+                        fontFamily: 'Poppins, sans-serif',
+                        margin: "10px auto",
+                        padding: "8px 12px",
+                        color: "#484e23",
+                        borderRadius: "5px",
+                        cursor: "pointer",
+                        display: "block",
+                    }}
+
                 />
             ))}
-            <Dialog open={open} onClose={handleClose}>
+            <Dialog open={open} onClose={handleClose} >
                 <DialogTitle>Modifier le film</DialogTitle>
                 <DialogContent>
                     {selectedFilm && (<CreateFilmForm film={selectedFilm} onSubmit={handleSubmit} />)}

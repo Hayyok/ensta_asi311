@@ -5,7 +5,15 @@ import Typography from "@mui/material/Typography";
 
 export default function Header() {
     return (
-        <AppBar position="static">
+        <AppBar position="static" style={{
+        backgroundColor: "#bdcf47",
+            fontFamily: 'Poppins, sans-serif',
+            padding: "8px 12px",
+            color: "#484e23",
+            borderRadius: "5px",
+            cursor: "pointer",
+            display: "block",
+    }}>
             <Toolbar>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     My Films
