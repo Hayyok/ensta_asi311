@@ -1,8 +1,13 @@
 CREATE TABLE IF NOT EXISTS Realisateur(id INT primary key auto_increment, nom VARCHAR(100), prenom VARCHAR(100), date_naissance TIMESTAMP, celebre BOOLEAN);
 INSERT INTO Realisateur(nom, prenom, date_naissance, celebre) VALUES('Cameron', 'James', '1954-08-16', false);
 INSERT INTO Realisateur(nom, prenom, date_naissance, celebre) VALUES('Jackson', 'Peter', '1961-10-31', true);
+INSERT INTO Realisateur(nom, prenom, date_naissance, celebre) VALUES('Olivier', 'Barou', '1964-01-05', true);
 
 CREATE TABLE IF NOT EXISTS Film(id INT primary key auto_increment, titre VARCHAR(100), duree INT, realisateur_id INT, note FLOAT, nb_note INT);
+INSERT INTO Film(titre, duree, realisateur_id, note, nb_note) VALUES('Les tuche 1', 95, 3, 1, 123);
+INSERT INTO Film(titre, duree, realisateur_id, note, nb_note) VALUES('Les tuche 2', 94, 3, 2, 123);
+INSERT INTO Film(titre, duree, realisateur_id, note, nb_note) VALUES('Les tuche 3', 92, 3, 3, 123);
+INSERT INTO Film(titre, duree, realisateur_id, note, nb_note) VALUES('Les tuche 4', 101, 3, 4, 123);
 INSERT INTO Film(titre, duree, realisateur_id, note, nb_note) VALUES('Avatar', 162, 1, 4.7, 13);
 INSERT INTO Film(titre, duree, realisateur_id, note, nb_note) VALUES('La communauté de l''anneau', 178, 2, 4.2, 26);
 INSERT INTO Film(titre, duree, realisateur_id, note, nb_note) VALUES('Les deux tours', 179, 2, 3.5, 7);
