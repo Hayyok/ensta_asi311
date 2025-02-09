@@ -6,23 +6,31 @@ import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-export default function FilmCard({ userId, film, onEdit, onDelete }) {
-    const handleClickOnDeleteButton = () => {
+
+export default function FilmCard({ film, userId, onEdit, onDelete, onSelect }) {
+    const handleClickOnDeleteButton = (e) => {
+        e.stopPropagation(); // Empêche le clic global sur la carte
         if (onDelete) onDelete(film.id);
     };
 
-    const handleClickOnEditButton = () => {
+    const handleClickOnEditButton = (e) => {
+        e.stopPropagation(); // Empêche le clic global sur la carte
         if (onEdit) onEdit(film);
     };
 
+    const handleClickCard = () => {
+        if (onSelect) onSelect(film);
+    };
+
     return (
-        <Card variant="outlined" sx={{ marginBottom: 2 }}>
+        <Card
+            variant="outlined"
+            sx={{ marginBottom: 2 }}
+            onClick={handleClickCard} // Ajoutez l'événement ici
+        >
             <CardContent>
                 <Typography variant="h5" gutterBottom>
                     {film.titre}
-                </Typography>
-                <Typography variant="body1">
-                    {film.duree} minutes
                 </Typography>
                 {userId === "admin" && (
                     <>
@@ -38,4 +46,3 @@ export default function FilmCard({ userId, film, onEdit, onDelete }) {
         </Card>
     );
 }
-
