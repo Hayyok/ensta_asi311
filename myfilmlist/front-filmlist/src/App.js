@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import Login from "./Login";
 import FilmContainer from "./FilmContainer";
 import AdminPanel from "./AdminPanel";
 import Header from "./Header";
 import { getFilmsFavorisWithUserId } from "./api/UserAPI";
+import FilmCard from "./FilmCard";
 
 
 export default function App() {
@@ -63,26 +64,32 @@ export default function App() {
                     {showFavoris && (
                         <div>
                             <h2>Mes Films Favoris</h2>
-                            <ul>
+                            <div style={{display: "flex", flexWrap: "wrap", gap: "16px"}}>
                                 {filmsFavoris.map((film) => (
-                                    <li key={film.id}>{film.titre}</li>
+                                    <FilmCard
+                                        key={film.id}
+                                        film={film}
+                                        userId={user.id}
+                                        userRole={user.role}
+                                        isFavoris={true}
+                                    />
                                 ))}
-                            </ul>
+                            </div>
                         </div>
                     )}
 
                     {/* Affichage des films (gestion admin / utilisateur classique) */}
                     {user.role === "admin" ? (
                         <>
-                            <AdminPanel />
-                            <FilmContainer userId={user.id} userRole={user.role} />
+                            <AdminPanel/>
+                            <FilmContainer userId={user.id} userRole={user.role}/>
                         </>
                     ) : (
-                        <FilmContainer userId={user.id} userRole={user.role} />
+                        <FilmContainer userId={user.id} userRole={user.role}/>
                     )}
                 </>
             ) : (
-                <Login onLoginSuccess={handleLoginSuccess} />
+                <Login onLoginSuccess={handleLoginSuccess}/>
             )}
         </div>
     );

@@ -39,6 +39,7 @@ export default function FilmList({ userId, userRole, films, onUpdateFilm, onDele
                     onSelect={() => onSelectFilm(film)} 
                     userRole={userRole}
                     userId={userId}
+                    isFavoris={false}
                 />
             ))}
             <Dialog open={open} onClose={handleClose}>

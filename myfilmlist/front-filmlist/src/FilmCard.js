@@ -12,7 +12,7 @@ import { Box } from "@mui/material";
 
 
 
-export default function FilmCard({ film, userId, userRole, onEdit, onDelete, onSelect }) {
+export default function FilmCard({ film, userId, userRole, onEdit, onDelete, onSelect, isFavoris }) {
     const [isFavorited, setIsFavorited] = useState(false); // État local pour indiquer si le film est ajouté
 
     const handleClickOnDeleteButton = (e) => {
@@ -59,7 +59,7 @@ export default function FilmCard({ film, userId, userRole, onEdit, onDelete, onS
             </CardContent>
 
             {/* Bouton Ajouter aux Favoris (uniquement pour les utilisateurs non-admins) */}
-            {userRole !== "admin" && (
+            {userRole !== "admin" && !isFavoris && (
                 <Box
                     sx={{
                         display: "flex",
