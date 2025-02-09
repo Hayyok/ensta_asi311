@@ -65,6 +65,15 @@ export default function CommentaireContainer() {
                     onChange={(e) => setNouveauCommentaire(e.target.value)}
                     multiline
                     rows={3}
+                    sx={{
+                        "& .MuiOutlinedInput-root": {
+                            "& fieldset": { borderColor: "#ccc" },  // Bordure normale
+                            "&:hover fieldset": { borderColor: "green" },  // Bordure au survol
+                            "&.Mui-focused fieldset": { borderColor: "green" }  // Bordure quand on clique
+                        },
+                        "& .MuiInputLabel-root": { color: "green" },  // Label par défaut en vert
+                        "& .MuiInputLabel-root.Mui-focused": { color: "green" }  // Label en vert quand focus
+                    }}
                 />
                 <Button
                     variant="contained"

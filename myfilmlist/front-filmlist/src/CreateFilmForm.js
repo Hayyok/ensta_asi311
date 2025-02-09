@@ -36,6 +36,15 @@ export default function CreateFilmForm({ film = {}, onSubmit }) {
                 onChange={(e) => setTitle(e.target.value)}
                 fullWidth
                 margin="normal"
+                sx={{
+                    "& .MuiOutlinedInput-root": {
+                        "& fieldset": { borderColor: "#ccc" },  // Bordure normale
+                        "&:hover fieldset": { borderColor: "green" },  // Bordure au survol
+                        "&.Mui-focused fieldset": { borderColor: "green" }  // Bordure quand on clique
+                    },
+                    "& .MuiInputLabel-root": { color: "green" },  // Label par défaut en vert
+                    "& .MuiInputLabel-root.Mui-focused": { color: "green" }  // Label en vert quand focus
+                }}
             />
             <TextField
                 label="Durée"
@@ -43,12 +52,31 @@ export default function CreateFilmForm({ film = {}, onSubmit }) {
                 onChange={(e) => setDuration(e.target.value)}
                 fullWidth
                 margin="normal"
+                sx={{
+                    "& .MuiOutlinedInput-root": {
+                        "& fieldset": { borderColor: "#ccc" },  // Bordure normale
+                        "&:hover fieldset": { borderColor: "green" },  // Bordure au survol
+                        "&.Mui-focused fieldset": { borderColor: "green" }  // Bordure quand on clique
+                    },
+                    "& .MuiInputLabel-root": { color: "green" },  // Label par défaut en vert
+                    "& .MuiInputLabel-root.Mui-focused": { color: "green" }  // Label en vert quand focus
+                }}
             />
-            <FormControl fullWidth margin="normal">
+            <FormControl fullWidth margin="normal"
+                         sx={{
+                             "& .MuiOutlinedInput-root": {
+                                 "& fieldset": { borderColor: "#ccc" },  // Bordure normale
+                                 "&:hover fieldset": { borderColor: "green" },  // Bordure au survol
+                                 "&.Mui-focused fieldset": { borderColor: "green" }  // Bordure quand on clique
+                             },
+                             "& .MuiInputLabel-root": { color: "green" },  // Label par défaut en vert
+                             "& .MuiInputLabel-root.Mui-focused": { color: "green" }  // Label en vert quand focus
+                         }}>
                 <InputLabel>Réalisateur</InputLabel>
                 <Select
                     value={selectedRealisateur}
                     onChange={(e) => setSelectedRealisateur(e.target.value)}
+
                 >
                     {realisateurs.map((realisateur) => (
                         <MenuItem key={realisateur.id} value={realisateur.id}>

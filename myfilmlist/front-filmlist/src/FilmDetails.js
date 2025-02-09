@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography, Box, Card, CardMedia, CardContent } from "@mui/material";
-import pessauxPlaceholder from "./assets/francois.jpg"
+import pessauxPlaceholder from "./assets/space_turtle5.png"
 import { Star } from "lucide-react";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";

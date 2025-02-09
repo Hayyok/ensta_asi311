@@ -74,11 +74,21 @@ export default function Login({ onLoginSuccess }) {
                 <>
                     <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", width: "300px" }}>
                         <TextField
+
                             label="Nom d'utilisateur"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             fullWidth
                             margin="normal"
+                            sx={{
+                                "& .MuiOutlinedInput-root": {
+                                    "& fieldset": { borderColor: "#ccc" },  // Bordure normale
+                                    "&:hover fieldset": { borderColor: "green" },  // Bordure au survol
+                                    "&.Mui-focused fieldset": { borderColor: "green" }  // Bordure quand on clique
+                                },
+                                "& .MuiInputLabel-root": { color: "green" },  // Label par défaut en vert
+                                "& .MuiInputLabel-root.Mui-focused": { color: "green" }  // Label en vert quand focus
+                            }}
                         />
                         <TextField
                             label="Mot de passe"
@@ -87,6 +97,15 @@ export default function Login({ onLoginSuccess }) {
                             onChange={(e) => setPassword(e.target.value)}
                             fullWidth
                             margin="normal"
+                            sx={{
+                                "& .MuiOutlinedInput-root": {
+                                    "& fieldset": { borderColor: "#ccc" },  // Bordure normale
+                                    "&:hover fieldset": { borderColor: "green" },  // Bordure au survol
+                                    "&.Mui-focused fieldset": { borderColor: "green" }  // Bordure quand on clique
+                                },
+                                "& .MuiInputLabel-root": { color: "green" },  // Label par défaut en vert
+                                "& .MuiInputLabel-root.Mui-focused": { color: "green" }  // Label en vert quand focus
+                            }}
                         />
                         <Button
                             type="submit"

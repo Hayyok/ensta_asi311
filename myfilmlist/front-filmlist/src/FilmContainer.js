@@ -84,6 +84,15 @@ export default function FilmContainer({ userId, userRole }) {
                     value={searchTerm}
                     onChange={handleSearchChange}
                     style={{ marginBottom: "20px" }}
+                    sx={{
+                        "& .MuiOutlinedInput-root": {
+                            "& fieldset": { borderColor: "#ccc" },  // Bordure normale
+                            "&:hover fieldset": { borderColor: "green" },  // Bordure au survol
+                            "&.Mui-focused fieldset": { borderColor: "green" }  // Bordure quand on clique
+                        },
+                        "& .MuiInputLabel-root": { color: "green" },  // Label par défaut en vert
+                        "& .MuiInputLabel-root.Mui-focused": { color: "green" }  // Label en vert quand focus
+                    }}
                 />
             </Grid>
             {/* Section de gestion des films */}

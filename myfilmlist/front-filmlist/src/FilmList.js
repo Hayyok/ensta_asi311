@@ -68,7 +68,10 @@ export default function FilmList({ userId, userRole, films, onUpdateFilm, onDele
                     {selectedFilm && (<CreateFilmForm film={selectedFilm} onSubmit={handleSubmit} />)}
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose} color="secondary">Annuler</Button>
+                    <Button onClick={handleClose} style={{
+                        fontFamily: 'Poppins, sans-serif',
+                        color: "#484e23",
+                    }}>Annuler</Button>
                 </DialogActions>
             </Dialog>
         </div>
