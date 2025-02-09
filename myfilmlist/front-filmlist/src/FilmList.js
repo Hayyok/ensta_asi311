@@ -4,7 +4,7 @@ import FilmCard from "./FilmCard";
 import CreateFilmForm from "./CreateFilmForm";
 import {getAllFilms} from "./api/FilmAPI";
 
-export default function FilmList({ onUpdateFilm, onDeleteFilm }) {
+export default function FilmList({ onUpdateFilm, onDeleteFilm, onSelectFilm }) {
     const [open, setOpen] = useState(false);
     const [films, setFilms] = useState([]);
     const [selectedFilm, setSelectedFilm] = useState(null);
@@ -47,6 +47,7 @@ export default function FilmList({ onUpdateFilm, onDeleteFilm }) {
                     film={film}
                     onEdit={handleEditFilm}
                     onDelete={handleDeleteFilm}
+                    onSelect={() => onSelectFilm(film)} 
                 />
             ))}
             <Dialog open={open} onClose={handleClose}>
