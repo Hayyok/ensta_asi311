@@ -7,6 +7,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import { addFilmFavoris } from "./api/UserAPI";
+import { Box } from "@mui/material";
+
 
 
 
@@ -37,10 +39,10 @@ export default function FilmCard({ film, userId, userRole, onEdit, onDelete, onS
     return (
         <Card
             variant="outlined"
-            sx={{ marginBottom: 2 }}
+            sx={{ marginBottom: 2, display: "flex", justifyContent: "space-between", padding: 2 }}
             onClick={handleClickCard} // Ajoutez l'événement ici
         >
-            <CardContent>
+            <CardContent sx={{ flex: 1 }}>
                 <Typography variant="h5" gutterBottom>
                     {film.titre}
                 </Typography>
@@ -54,16 +56,33 @@ export default function FilmCard({ film, userId, userRole, onEdit, onDelete, onS
                         </IconButton>
                     </>
                 )}
-                {/* Bouton Ajouter aux Favoris (uniquement pour les utilisateurs non-admins) */}
-                {userRole !== "admin" && (
+            </CardContent>
+
+            {/* Bouton Ajouter aux Favoris (uniquement pour les utilisateurs non-admins) */}
+            {userRole !== "admin" && (
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-end",
+                        justifyContent: "center",
+                    }}
+                >
+                    <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        sx={{ marginBottom: "5px", fontSize: "12px" }}
+                    >
+                        Ajouter aux favoris
+                    </Typography>
                     <IconButton
                         onClick={handleAddToFavorites}
                         color={isFavorited ? "success" : "primary"} // Change la couleur si ajouté
                     >
                         <AddIcon />
                     </IconButton>
-                )}
-            </CardContent>
+                </Box>
+            )}
         </Card>
     );
 }
