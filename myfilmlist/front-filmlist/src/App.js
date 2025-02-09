@@ -18,15 +18,22 @@ export default function App() {
     };
 
     const handleShowFavoris = () => {
-        if (user) {
-            getFilmsFavorisWithUserId(user.id)
-                .then((response) => {
-                    setFilmsFavoris(response.data);
-                    setShowFavoris(true);
-                })
-                .catch((err) => console.error("Erreur lors de la récupération des films favoris :", err));
+        if (showFavoris) {
+            // Si la liste est déjà affichée, on la cache
+            setShowFavoris(false);
+        } else {
+            // Sinon, on récupère les films favoris et on les affiche
+            if (user) {
+                getFilmsFavorisWithUserId(user.id)
+                    .then((response) => {
+                        setFilmsFavoris(response.data);
+                        setShowFavoris(true);
+                    })
+                    .catch((err) => console.error("Erreur lors de la récupération des films favoris :", err));
+            }
         }
     };
+
 
     return (
         <div>
@@ -68,10 +75,10 @@ export default function App() {
                     {user.role === "admin" ? (
                         <>
                             <AdminPanel />
-                            <FilmContainer userRole={user.role} />
+                            <FilmContainer userId={user.id} userRole={user.role} />
                         </>
                     ) : (
-                        <FilmContainer userRole={user.role} />
+                        <FilmContainer userId={user.id} userRole={user.role} />
                     )}
                 </>
             ) : (

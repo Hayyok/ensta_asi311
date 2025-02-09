@@ -6,7 +6,7 @@ import { getAllFilms, postFilm, putFilm, deleteFilm } from "./api/FilmAPI";
 import { getAllRealisateurs } from "./api/RealisateurAPI";
 import { Button } from "@mui/material";
 
-export default function FilmContainer({ userRole }) {
+export default function FilmContainer({ userId, userRole }) {
     const [films, setFilms] = useState([]);
     const [isCreating, setIsCreating] = useState(false);
     const [selectedFilm, setSelectedFilm] = useState(null);
@@ -89,6 +89,7 @@ export default function FilmContainer({ userRole }) {
                 // Liste des films
                 <FilmList
                     films={films}
+                    userId={userId}
                     userRole={userRole}
                     onUpdateFilm={handleUpdateFilm}
                     onDeleteFilm={handleDeleteFilm}
