@@ -124,6 +124,7 @@ export default function FilmContainer({ userId, userRole }) {
                                 film={selectedFilm}
                                 realisateurs={realisateurs}
                                 onClose={handleCloseDetails}
+                                isFavoris={false}
                             />
                         ) : (
                             <FilmList

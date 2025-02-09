@@ -7,7 +7,7 @@ import StarIcon from "@mui/icons-material/Star";
 import Modal from "@mui/material/Modal";
 
 
-export default function FilmDetails({ film, realisateurs, onClose, onRate }) {
+export default function FilmDetails({ isFavoris, film, realisateurs, onClose, onRate }) {
     const [open, setOpen] = useState(false);
     const [selectedNote, setSelectedNote] = useState(film.note || 2.5);
     if (!film) return null;
@@ -74,15 +74,17 @@ export default function FilmDetails({ film, realisateurs, onClose, onRate }) {
                     </Typography>
 
                     {/*Note*/}
-                    <div className="flex items-center gap-2">
-                        <Rating
-                            name="text-feedback"
-                            value={film.note}
-                            readOnly
-                            precision={0.5}
-                            emptyIcon={<StarIcon style={{opacity: 0.2}} fontSize="inherit"/>}
-                        />
-                    </div>
+                    {!isFavoris && (
+                        <div className="flex items-center gap-2">
+                            <Rating
+                                name="text-feedback"
+                                value={film.note}
+                                readOnly
+                                precision={0.5}
+                                emptyIcon={<StarIcon style={{opacity: 0.2}} fontSize="inherit"/>}
+                            />
+                        </div>
+                    )}
                     {/* Informations */}
                     <Box sx={{marginY: 2}}>
                         <Typography variant="body1" sx={{marginBottom: 1}}>
