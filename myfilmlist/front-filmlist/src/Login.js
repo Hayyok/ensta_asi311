@@ -2,8 +2,38 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Pour rediriger vers une autre page
 import { TextField, Button, Typography, Box } from "@mui/material";
 import turtleImage from "./assets/turtle.png";
-import { login } from "./mock/UserMock"; // Importez la fonction login depuis UserMock.js
-//import { login } from "./api/UserAPI"
+//import { login } from "./mock/UserMock";
+import { getAllUtilisateur } from "./api/UserAPI"
+
+export const login = async (username, password) => {
+    try {
+        const response = await getAllUtilisateur(); // Attendre que la requête API soit complétée
+        const allUtilisateurs = response.data; // Récupérer les utilisateurs depuis la réponse API
+
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                const user = allUtilisateurs.find(
+                    (u) => u.username === username && u.password === password
+                );
+                console.log("Utilisateur trouvé :", user);
+
+                if (user) {
+                    resolve({
+                        success: true,
+                        ...user,
+                        token: "mock-token"
+                    });
+                } else {
+                    reject({ success: false, message: "Nom d'utilisateur ou mot de passe incorrect" });
+                }
+            }, 500);
+        });
+    } catch (error) {
+        console.error("Erreur lors de la récupération des utilisateurs :", error);
+        throw new Error("Problème de connexion au serveur");
+    }
+};
+
 
 export default function Login({ onLoginSuccess }) {
     const [username, setUsername] = useState("");

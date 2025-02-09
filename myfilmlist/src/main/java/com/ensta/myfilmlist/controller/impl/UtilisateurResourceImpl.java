@@ -50,7 +50,7 @@ public class UtilisateurResourceImpl implements UtilisateurResource {
      * @throws ControllerException en cas d'erreur de traitement
      */
     @GetMapping("/{id}")
-    public ResponseEntity<UtilisateurDTO> getUtilisateurById(long id) throws ControllerException {
+    public ResponseEntity<UtilisateurDTO> getUtilisateurById(@PathVariable long id) throws ControllerException {
         try{
             UtilisateurDTO utilisateurDTO = myFilmsService.findUtilisateurDTOById(id).get();
             return ResponseEntity.status(HttpStatus.OK).body(utilisateurDTO);
@@ -58,6 +58,7 @@ public class UtilisateurResourceImpl implements UtilisateurResource {
             throw new ControllerException(e);
         }
     }
+
 
     //@GetMapping("/{id}/filmsFavoris")
     //public ResponseEntity<List<FilmDTO>> getFilmsFavorisByUtilisateurId(long utilisateurId) throws ControllerException {
