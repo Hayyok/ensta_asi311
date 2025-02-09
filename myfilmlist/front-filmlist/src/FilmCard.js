@@ -58,6 +58,12 @@ export default function FilmCard({ film, userId, userRole, onEdit, onDelete, onS
                 {userRole !== "admin" && (
                     <IconButton
                         onClick={handleAddToFavorites}
+                        style={{
+                            fontFamily: 'Poppins, sans-serif',
+                            color: "#484e23",
+                            borderRadius: "5px",
+                            cursor: "pointer",
+                        }}
                         color={isFavorited ? "success" : "primary"} // Change la couleur si ajouté
                     >
                         <AddIcon />

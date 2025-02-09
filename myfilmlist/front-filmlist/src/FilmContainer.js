@@ -77,6 +77,11 @@ export default function FilmContainer({ userId, userRole }) {
                                 variant="contained"
                                 color="primary"
                                 style={{ marginBottom: "16px" }}
+                                style={{
+                                    backgroundColor: "#bdcf47",
+                                    fontFamily: 'Poppins, sans-serif',
+                                    color: "#484e23",
+                                }}
                             >
                                 Ajouter un Film
                             </Button>

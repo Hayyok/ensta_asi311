@@ -97,7 +97,11 @@ export default function FilmDetails({ film, realisateurs, onClose, onRate }) {
             </Card>
             {/* Boutons */}
             <DialogActions>
-                <Button variant="contained" color="primary" sx={{ mt: 2 , mr: 1}} onClick={() => setOpen(true)}>
+                <Button variant="contained" style={{
+                    backgroundColor: "#bdcf47",
+                    fontFamily: 'Poppins, sans-serif',
+                    color: "#484e23",
+                }} sx={{ mt: 2 , mr: 1}} onClick={() => setOpen(true)}>
                     Noter
                 </Button>
 
@@ -111,19 +115,42 @@ export default function FilmDetails({ film, realisateurs, onClose, onRate }) {
                             onChange={(event, newValue) => setSelectedNote(newValue)}
                         />
                         <Box sx={{ mt: 2 }}>{labels[selectedNote]}</Box>
-                        <Button variant="contained" sx={{ mt: 2, mr: 1 }} onClick={handleSaveNote}>
+                        <Button variant="contained" sx={{ mt: 2, mr: 1 }} onClick={handleSaveNote} style={{
+                            backgroundColor: "#bdcf47",
+                            fontFamily: 'Poppins, sans-serif',
+                            color: "#484e23",
+                        }}>
                             Valider
                         </Button>
-                        <Button variant="outlined" sx={{ mt: 2 }} onClick={() => setOpen(false)}>
+                        <Button  variant="outlined" sx={{
+                            mt: 2,
+                            fontFamily: 'Poppins, sans-serif',
+                            color: "#484e23",      // Couleur du texte
+                            borderColor: "#484e23" // Couleur du contour
+                        }}  onClick={() => setOpen(false)} style={{
+                            fontFamily: 'Poppins, sans-serif',
+                            color: "#484e23",
+                        }}>
                             Annuler
                         </Button>
                     </Box>
                 </Modal>
 
-                <Button onClick={onClose} variant="outlined" color="primary">
+                <Button onClick={onClose} variant="outlined" color="primary" sx={{
+                    mt: 2,
+                    fontFamily: 'Poppins, sans-serif',
+                    color: "#484e23",      // Couleur du texte
+                    borderColor: "#484e23" // Couleur du contour
+                }}>
                     Fermer
                 </Button>
-                <Button onClick={() => alert("Modifier film")} variant="contained" color="secondary">
+                <Button onClick={() => alert("Modifier film")} variant="contained" color="secondary" sx={{
+                    mt: 2,
+                    fontFamily: 'Poppins, sans-serif',
+                    backgroundColor: "#484e23",
+                    color: "white",      // Couleur du texte
+                    borderColor: "#484e23" // Couleur du contour
+                }}>
                     Modifier
                 </Button>
             </DialogActions>
