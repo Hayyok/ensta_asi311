@@ -97,7 +97,9 @@ export default function FilmDetails({ film, realisateurs, onClose, onRate }) {
             </Card>
             {/* Boutons */}
             <DialogActions sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+
                 <Button variant="contained" color="primary" style={{
+                    mt: 2,
                     backgroundColor: "#bdcf47",
                     fontFamily: 'Poppins, sans-serif',
                     color: "#484e23",
@@ -137,22 +139,13 @@ export default function FilmDetails({ film, realisateurs, onClose, onRate }) {
                 </Modal>
 
                 <Button onClick={onClose} variant="outlined" color="primary" sx={{
-                    mt: 2,
                     fontFamily: 'Poppins, sans-serif',
                     color: "#484e23",      // Couleur du texte
                     borderColor: "#484e23" // Couleur du contour
                 }}>
                     Fermer
                 </Button>
-                <Button onClick={() => alert("Modifier film")} variant="contained" color="secondary" sx={{
-                    mt: 2,
-                    fontFamily: 'Poppins, sans-serif',
-                    backgroundColor: "#484e23",
-                    color: "white",      // Couleur du texte
-                    borderColor: "#484e23" // Couleur du contour
-                }}>
-                    Modifier
-                </Button>
+
             </DialogActions>
         </Dialog>
     )
