@@ -8,8 +8,20 @@ INSERT INTO Film(titre, duree, realisateur_id) VALUES('La communauté de l''anne
 INSERT INTO Film(titre, duree, realisateur_id) VALUES('Les deux tours', 179, 2);
 INSERT INTO Film(titre, duree, realisateur_id) VALUES('Le retour du roi', 201, 2);
 
+
 CREATE TABLE IF NOT EXISTS Utilisateur(id INT primary key auto_increment, username VARCHAR(100), password VARCHAR(100), role VARCHAR(100));
 INSERT INTO Utilisateur(username, password, role) VALUES('john_doe', 'password123', 'user');
 INSERT INTO Utilisateur(username, password, role) VALUES('jane_doe', 'secure456', 'user');
 INSERT INTO Utilisateur(username, password, role) VALUES('turtle_lover', 'iloveturtles', 'admin');
 INSERT INTO Utilisateur(username, password, role) VALUES('admin', 'admin', 'admin');
+
+CREATE TABLE IF NOT EXISTS Utilisateur_FilmsFavoris (
+    utilisateur_id INT,
+    film_id INT,
+    PRIMARY KEY (utilisateur_id, film_id),
+    FOREIGN KEY (utilisateur_id) REFERENCES Utilisateur(id) ON DELETE CASCADE,
+    FOREIGN KEY (film_id) REFERENCES Film(id) ON DELETE CASCADE);
+INSERT INTO Utilisateur_FilmsFavoris(utilisateur_id, film_id) VALUES (1, 2); -- John Doe aime "La communauté de l'anneau"
+INSERT INTO Utilisateur_FilmsFavoris(utilisateur_id, film_id) VALUES (1, 3); -- John Doe aime "Les deux tours"
+INSERT INTO Utilisateur_FilmsFavoris(utilisateur_id, film_id) VALUES (2, 1); -- Jane Doe aime "Avatar"
+INSERT INTO Utilisateur_FilmsFavoris(utilisateur_id, film_id) VALUES (3, 2); -- Turtle Lover aime "La communauté de l'anneau"

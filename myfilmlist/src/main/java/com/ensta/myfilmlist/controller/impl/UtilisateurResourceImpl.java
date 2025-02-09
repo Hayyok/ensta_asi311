@@ -7,6 +7,7 @@ import com.ensta.myfilmlist.dto.UtilisateurDTO;
 import com.ensta.myfilmlist.exception.ControllerException;
 import com.ensta.myfilmlist.form.UtilisateurForm;
 import com.ensta.myfilmlist.service.MyFilmsService;
+import com.ensta.myfilmlist.controller.FilmResource;
 import com.ensta.myfilmlist.service.ServiceException;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -20,6 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.Valid;
 import java.util.List;
+
+import static java.lang.System.in;
 
 @RestController
 @RequestMapping("/utilisateur")
@@ -59,11 +62,25 @@ public class UtilisateurResourceImpl implements UtilisateurResource {
         }
     }
 
+    @GetMapping("/{id}/filmsFavoris")
+    public ResponseEntity<List<FilmDTO>> getFilmsFavorisByUtilisateurId(@PathVariable long id) throws ControllerException {
+        try{
+            List<FilmDTO> filmsFavoris = myFilmsService.findFilmsFavorisByUtilisateurId(id);
+            return ResponseEntity.status(HttpStatus.OK).body(filmsFavoris);
+        } catch (Exception e) {
+            throw new ControllerException(e);
+        }
+    }
 
-    //@GetMapping("/{id}/filmsFavoris")
-    //public ResponseEntity<List<FilmDTO>> getFilmsFavorisByUtilisateurId(long utilisateurId) throws ControllerException {
-    //
-    //}
+    @PostMapping("/{id}/filmsFavoris")
+    public ResponseEntity<FilmDTO> addFilmFavorisForUtilisateurIdByFilmId(@PathVariable long id, long filmId) throws ControllerException {
+        try{
+            FilmDTO filmFavoris = myFilmsService.addFilmFavorisForUtilisateurIdByFilmId(id, filmId);
+            return ResponseEntity.status(HttpStatus.OK).body(filmFavoris);
+        } catch (ServiceException e) {
+            throw new ControllerException(e);
+        }
+    }
 
     /**
      * Crée l'utilisateur avec les paramètres donnés et le renvoie avec son identifiant une fois créé.

@@ -1,6 +1,7 @@
 package com.ensta.myfilmlist.dao.impl;
 
 import com.ensta.myfilmlist.dao.UtilisateurDAO;
+import com.ensta.myfilmlist.model.Film;
 import com.ensta.myfilmlist.model.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -73,4 +74,37 @@ public class JdbcUtilisateurDAO implements UtilisateurDAO {
             return Optional.empty(); // Aucun résultat trouvé
         }
     }
+
+    // RowMapper pour les films
+    private final RowMapper<Film> filmRowMapper = (resultSet, rowNum) -> {
+        Film film = new Film();
+        film.setId(resultSet.getInt("id"));
+        film.setTitre(resultSet.getString("titre"));
+        film.setDuree(resultSet.getInt("duree"));
+        film.setRealisateurId(resultSet.getInt("realisateur_id"));
+        return film;
+    };
+
+
+    @Override
+    public List<Film> findFilmsFavorisByUtilisateurId(long utilisateurId) {
+        String query = "SELECT f.id, f.titre, f.duree, f.realisateur_id " +
+                "FROM Film f " +
+                "JOIN Utilisateur_FilmsFavoris uf ON f.id = uf.film_id " +
+                "WHERE uf.utilisateur_id = ?";
+
+        try {
+            return jdbcTemplate.query(query, filmRowMapper, utilisateurId);
+        } catch (EmptyResultDataAccessException e) {
+            return List.of();
+        }
+    }
+
+    @Override
+    public void addFilmFavorisForUtilisateurIdByFilmId(long utilisateurId, long filmId) {
+        String query = "INSERT INTO Utilisateur_FilmsFavoris (utilisateur_id, film_id) VALUES (?, ?)";
+        jdbcTemplate.update(query, utilisateurId, filmId);
+    }
+
+
 }
