@@ -4,6 +4,8 @@ import { TextField, Button, Typography, Box } from "@mui/material";
 import turtleImage from "./assets/turtle.png";
 //import { login } from "./mock/UserMock";
 import { getAllUtilisateur } from "./api/UserAPI"
+import CreateUtilisateurForm from "./CreateUtilisateurForm"; // Importer le formulaire de création
+
 
 export const login = async (username, password) => {
     try {
@@ -39,6 +41,7 @@ export default function Login({ onLoginSuccess }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
+    const [showCreateAccount, setShowCreateAccount] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -54,9 +57,60 @@ export default function Login({ onLoginSuccess }) {
         }
     };
 
+    const handleCreateAccountClick = () => {
+        setShowCreateAccount(true);
+    };
+
+    const handleAccountCreated = () => {
+        setShowCreateAccount(false);
+    };
+
     return (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "50px" }}>
             <img src={turtleImage} alt="Tortue" style={{ width: "200px", marginBottom: "20px" }} />
+            {showCreateAccount ? (
+                <CreateUtilisateurForm onAccountCreated={handleAccountCreated} />
+            ) : (
+                <>
+                    <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", width: "300px" }}>
+                        <TextField
+                            label="Nom d'utilisateur"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            fullWidth
+                            margin="normal"
+                        />
+                        <TextField
+                            label="Mot de passe"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            fullWidth
+                            margin="normal"
+                        />
+                        <Button type="submit" variant="contained" color="primary" style={{ marginTop: "20px" }}>
+                            Connexion
+                        </Button>
+                        {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
+                    </form>
+                    <Button
+                        variant="outlined"
+                        color="secondary"
+                        style={{ marginTop: "20px" }}
+                        onClick={handleCreateAccountClick}
+                    >
+                        Créer un compte
+                    </Button>
+                </>
+            )}
+        </div>
+    );
+}
+
+    /*return (
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "50px" }}>
+            <img src={turtleImage} alt="Tortue" style={{ width: "200px", marginBottom: "20px" }} />
+
             <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", width: "300px" }}>
                 <input
                     type="text"
@@ -89,4 +143,4 @@ export default function Login({ onLoginSuccess }) {
             </form>
         </div>
     );
-}
+}*/

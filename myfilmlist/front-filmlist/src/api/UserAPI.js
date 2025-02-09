@@ -11,7 +11,6 @@ export function postUtilisateur(utilisateur) {
         username: utilisateur.username,
         password: utilisateur.password,
     });
-
     return axios.post(`${UTILISATEUR_URI}?${params.toString()}`);
 }
 
