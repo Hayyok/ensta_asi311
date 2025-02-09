@@ -1,6 +1,7 @@
 package com.ensta.myfilmlist.model;
 
 import com.ensta.myfilmlist.dto.RealisateurDTO;
+import com.zaxxer.hikari.pool.HikariProxyCallableStatement;
 
 import javax.persistence.*;
 
@@ -23,6 +24,10 @@ public class Film {
 	//@ManyToOne
 	//@JoinColumn(nullable = false)
 	private long realisateurId;
+
+	private float note;
+
+	private int nb_note;
 
 	// Getters et Setters
 	public long getId() {
@@ -48,6 +53,12 @@ public class Film {
 	public void setDuree(int duree) {
 		this.duree = duree;
 	}
+
+	public float getNote() {return note;}
+	public void setNote(float note) {this.note = note;}
+
+	public int getNb_note() {return nb_note;}
+	public void setNb_note(int nb_note) {this.nb_note = nb_note;}
 
 
 }

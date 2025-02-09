@@ -9,6 +9,9 @@ public class FilmDTO {
 	private String titre;
 	private int duree;
 	private long realisateurDTOId;
+	private float note;
+	private int nb_note;
+
 
 	public long getRealisateurDTOId() { return realisateurDTOId; }
 	public void setRealisateurDTOId(long realisateurDTOId) { this.realisateurDTOId = realisateurDTOId; }
@@ -33,6 +36,12 @@ public class FilmDTO {
 	public void setDuree(int duree) {
 		this.duree = duree;
 	}
+
+	public float getNote() {return note;}
+	public void setNote(float note) {this.note = note;}
+
+	public int getNb_note() {return nb_note;}
+	public void setNb_note(int nb_note) {this.nb_note = nb_note;}
 
 	@Override
 	public String toString() {
