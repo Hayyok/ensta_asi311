@@ -20,6 +20,6 @@ export function ajouterCommentaire(commentaire) {
         id: mockCommentaires.length + 1,
         ...commentaire,
     };
-    mockCommentaires.push(newCommentaire);
+    //mockCommentaires.push(newCommentaire);
     return Promise.resolve(newCommentaire);
 }
