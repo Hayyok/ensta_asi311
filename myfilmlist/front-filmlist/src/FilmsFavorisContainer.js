@@ -55,7 +55,7 @@ export default function FilmFavorisContainer({ userId }) {
             </Grid>
 
             {/* Afficher les détails du film lorsqu'il est sélectionné */}
-            {selectedFilm && <FilmDetails film={selectedFilm} realisateurs={realisateurs} onClose={handleCloseDetails} />}
+            {selectedFilm && <FilmDetails film={selectedFilm} realisateurs={realisateurs} onClose={handleCloseDetails} isFavoris={true}/>}
         </div>
     );
 }

@@ -66,21 +66,26 @@ export default function AdminPanel() {
         <div style={{margin: "20px"}}>
             <h2>Gestion des Réalisateurs</h2>
             {error && <p style={{color: "red"}}>{error}</p>}
-            <ul>
+            <ul style={{listStyle: "none", padding: 0}}>
                 {realisateurs.map((realisateur) => (
-                    <li key={realisateur.id}>
-                        {`${realisateur.prenom || "Inconnu"} ${realisateur.nom || "Inconnu"} - ${realisateur.dateNaissance || "Date inconnue"}`}
+                    <li key={realisateur.id} style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        borderBottom: "1px solid #ccc",
+                        padding: "8px 0"
+                    }}>
+                        <span>{`${realisateur.prenom || "Inconnu"} ${realisateur.nom || "Inconnu"} - ${realisateur.dateNaissance || "Date inconnue"}`}</span>
                         <button
                             onClick={() => handleDeleteRealisateur(realisateur.id)}
                             style={{
                                 backgroundColor: "#bdcf47",
                                 fontFamily: 'Poppins, sans-serif',
-                                margin: "10px auto",
                                 padding: "8px 12px",
                                 color: "#484e23",
                                 borderRadius: "5px",
                                 cursor: "pointer",
-                                display: "block",
+                                border: "none"
                             }}
                         >
                             Supprimer
@@ -88,39 +93,40 @@ export default function AdminPanel() {
                     </li>
                 ))}
             </ul>
-            <input
-                type="text"
-                placeholder="Prénom"
-                value={newRealisateur.prenom}
-                onChange={(e) => setNewRealisateur({...newRealisateur, prenom: e.target.value})}
-            />
-            <input
-                type="text"
-                placeholder="Nom"
-                value={newRealisateur.nom}
-                onChange={(e) => setNewRealisateur({...newRealisateur, nom: e.target.value})}
-            />
-            <input
-                type="date"
-                placeholder="Date de naissance"
-                value={newRealisateur.dateNaissance}
-                onChange={(e) => setNewRealisateur({...newRealisateur, dateNaissance: e.target.value})}
-            />
-            <button
-                onClick={handleAddRealisateur}
-                style={{
-                    backgroundColor: "#bdcf47",
-                    fontFamily: 'Poppins, sans-serif',
-                    margin: "10px auto",
-                    padding: "8px 12px",
-                    color: "#484e23",
-                    borderRadius: "5px",
-                    cursor: "pointer",
-                    display: "block",
-                }}
-            >
-                Ajouter
-            </button>
+            <div style={{display: "flex", alignItems: "center", gap: "10px", marginTop: "10px"}}>
+                <input
+                    type="text"
+                    placeholder="Prénom"
+                    value={newRealisateur.prenom}
+                    onChange={(e) => setNewRealisateur({...newRealisateur, prenom: e.target.value})}
+                />
+                <input
+                    type="text"
+                    placeholder="Nom"
+                    value={newRealisateur.nom}
+                    onChange={(e) => setNewRealisateur({...newRealisateur, nom: e.target.value})}
+                />
+                <input
+                    type="date"
+                    placeholder="Date de naissance"
+                    value={newRealisateur.dateNaissance}
+                    onChange={(e) => setNewRealisateur({...newRealisateur, dateNaissance: e.target.value})}
+                />
+                <button
+                    onClick={handleAddRealisateur}
+                    style={{
+                        backgroundColor: "#bdcf47",
+                        fontFamily: 'Poppins, sans-serif',
+                        padding: "8px 12px",
+                        color: "#484e23",
+                        borderRadius: "5px",
+                        cursor: "pointer",
+                        border: "none"
+                    }}
+                >
+                    Ajouter
+                </button>
+            </div>
         </div>
     );
 }
