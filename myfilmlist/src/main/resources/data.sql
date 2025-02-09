@@ -8,6 +8,8 @@ INSERT INTO Film(titre, duree, realisateur_id) VALUES('La communauté de l''anne
 INSERT INTO Film(titre, duree, realisateur_id) VALUES('Les deux tours', 179, 2);
 INSERT INTO Film(titre, duree, realisateur_id) VALUES('Le retour du roi', 201, 2);
 
-CREATE TABLE IF NOT EXISTS Utilisateur(id INT primary key auto_increment, nom VARCHAR(100), prenom VARCHAR(100));
-INSERT INTO Utilisateur(nom, prenom) VALUES('John', 'Doe');
-INSERT INTO Utilisateur(nom, prenom) VALUES('Jane', 'Doe');
+CREATE TABLE IF NOT EXISTS Utilisateur(id INT primary key auto_increment, username VARCHAR(100), password VARCHAR(100), role VARCHAR(100));
+INSERT INTO Utilisateur(username, password, role) VALUES('john_doe', 'password123', 'user');
+INSERT INTO Utilisateur(username, password, role) VALUES('jane_doe', 'secure456', 'user');
+INSERT INTO Utilisateur(username, password, role) VALUES('turtle_lover', 'iloveturtles', 'admin');
+INSERT INTO Utilisateur(username, password, role) VALUES('admin', 'admin', 'admin');

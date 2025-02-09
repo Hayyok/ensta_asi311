@@ -25,14 +25,15 @@ public class JdbcUtilisateurDAO implements UtilisateurDAO {
     private final RowMapper<Utilisateur> utilisateurRowMapper = (resultSet, rowNum) -> {
         Utilisateur utilisateur = new Utilisateur();
         utilisateur.setId(resultSet.getInt("id"));
-        utilisateur.setNom(resultSet.getString("nom"));
-        utilisateur.setPrenom(resultSet.getString("prenom"));
+        utilisateur.setUsername(resultSet.getString("username"));
+        utilisateur.setPassword(resultSet.getString("password"));
+        utilisateur.setRole(resultSet.getString("role"));
         return utilisateur;
     };
 
     @Override
     public List<Utilisateur> findAll(){
-        String query = "SELECT id, nom, prenom FROM Utilisateur";
+        String query = "SELECT id, username, password, role FROM Utilisateur";
         try{
             return jdbcTemplate.query(query, utilisateurRowMapper);
         } catch (EmptyResultDataAccessException e) {
@@ -42,12 +43,12 @@ public class JdbcUtilisateurDAO implements UtilisateurDAO {
 
     @Override
     public Utilisateur save(Utilisateur utilisateur){
-        String query = "INSERT INTO Utilisateur (nom, prenom) VALUES (?, ?)";
+        String query = "INSERT INTO Utilisateur (username, password) VALUES (?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         PreparedStatementCreator creator = conn -> {
             PreparedStatement statement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, utilisateur.getNom());
-            statement.setString(2, utilisateur.getPrenom());
+            statement.setString(1, utilisateur.getUsername());
+            statement.setString(2, utilisateur.getPassword());
             return statement;
         };
 
@@ -64,7 +65,7 @@ public class JdbcUtilisateurDAO implements UtilisateurDAO {
 
     @Override
     public Optional<Utilisateur> findById(long id) {
-        String query = "SELECT id, nom, prenom FROM Utilisateur WHERE id = ?";
+        String query = "SELECT id, username, password, role FROM Utilisateur WHERE id = ?";
         try {
             Utilisateur utilisateur = jdbcTemplate.queryForObject(query, utilisateurRowMapper, id);
             return Optional.of(utilisateur);

@@ -96,28 +96,3 @@ export default function AdminPanel() {
         </div>
     );
 }
-/*
-<div style={{marginTop: "20px"}}>
-                <input
-                    type="text"
-                    placeholder="Nom complet du réalisateur"
-                    value={newRealisateur}
-                    onChange={(e) => setNewRealisateur(e.target.value)}
-                    style={{padding: "10px", marginRight: "10px"}}
-                />
-                <button
-                    onClick={handleAddRealisateur}
-                    style={{
-                        backgroundColor: "green",
-                        color: "white",
-                        padding: "10px",
-                        border: "none",
-                        borderRadius: "5px",
-                        cursor: "pointer",
-                    }}
-                >
-                    Ajouter
-                </button>
-                {error && <p style={{color: "red", marginTop: "10px"}}>{error}</p>}
-            </div>
- */
