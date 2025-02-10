@@ -4,3 +4,6 @@
 *.iws
 *.iml
 *.ipr
+
+myfilmlist/front-filmlist/node_modules/*
+myfilmlist/target
